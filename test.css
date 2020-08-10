@@ -1,3 +1,13 @@
 h1 { color: red; }
-p  { background: blue; }
-div{background: blue}
+p  { text-align: center;}
+div{border: 1px solid black;margin: 0 auto}
+ul{list-style: none;}
+#wrap{width: 1080px;height: auto;}
+#header{height: 200px}
+#container{height: 2600px}
+#footer{height: 340px}
+#M_Left{background-color: #00FF00; width: 69%;height: 100%;float: left;}
+#M_Right{background-color: #09C;width: 30%;height: 100%;float: right;}
+#account{background-color: #979797; height: 150px}
+.list_content{width: 40%;float: left;display: block;}
+.M_Top_con{height: 200px;display: inline-block;width: 100%}

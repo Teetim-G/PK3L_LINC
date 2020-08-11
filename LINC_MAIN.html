@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="kr">
 
 <head>
   <!-- Required meta tags -->
@@ -8,54 +8,64 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="css/LINC_MAIN.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
   <title>WELCOME!! MAINPAGE</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/LINC_MAIN.css">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+
 </head>
 
-<body>
-  <div id="wrap">
-    <div id="header">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-        <a class="navbar-brand" href="#">Logo Here</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<body id="page-top">
+  <div id="wrap" >
+    <header id="header">
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item ">
-              <a class="nav-link" href="#">게시판 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">블로그</a>
-            </li>
-            <!-- <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li> -->
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">비활성화</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search"  placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Search</button>
-          </form>
-          <button class="btn btn-outline-primary my-2 my-sm-0 mx-2">로그인</button>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand js-scroll-trigger" href="#page-top">Logo Here</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item ">
+                <a class="nav-link" href="#">게시판 <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">블로그</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">비활성화</a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search"  placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Search</button>
+            </form>
+            <button class="btn btn-outline-primary my-2 my-sm-0 mx-2">로그인</button>
+          </div>
         </div>
+
       </nav>
 
-    </div>
+    </header>
     <div id="container" class="container row">
       <div class="column_left row col-xl-9 col-lg-9 col-md-9 col-sm-12" id="M_Left">
         <div class="M_Top_con ">
@@ -79,6 +89,54 @@
         </div>
 
         <div class="M_con row">
+          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
+            <h4>게시판 제목</h4>
+            <ul class="list_content">
+              <li>요소 1</li>
+              <li>요소 2</li>
+              <li>요소 3</li>
+              <li>요소 4</li>
+              <li>요소 5</li>
+              <li>요소 6</li>
+              <li>요소 7</li>
+            </ul>
+          </div>
+          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
+            <h4>게시판 제목</h4>
+            <ul class="list_content">
+              <li>요소 1</li>
+              <li>요소 2</li>
+              <li>요소 3</li>
+              <li>요소 4</li>
+              <li>요소 5</li>
+              <li>요소 6</li>
+              <li>요소 7</li>
+            </ul>
+          </div>
+          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
+            <h4>게시판 제목</h4>
+            <ul class="list_content">
+              <li>요소 1</li>
+              <li>요소 2</li>
+              <li>요소 3</li>
+              <li>요소 4</li>
+              <li>요소 5</li>
+              <li>요소 6</li>
+              <li>요소 7</li>
+            </ul>
+          </div>
+          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
+            <h4>게시판 제목</h4>
+            <ul class="list_content">
+              <li>요소 1</li>
+              <li>요소 2</li>
+              <li>요소 3</li>
+              <li>요소 4</li>
+              <li>요소 5</li>
+              <li>요소 6</li>
+              <li>요소 7</li>
+            </ul>
+          </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
             <h4>게시판 제목</h4>
             <ul class="list_content">
@@ -182,15 +240,22 @@
         </div>
       </div>
     </div>
-    <footer id="footer">
-      <p>이곳은 Footer 입니다.</p>
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; 2020</p>
+      </div>
+      <!-- /.container -->
     </footer>
   </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script> -->
+
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/scrolling-nav.js"></script>
 </body>
 
 </html>

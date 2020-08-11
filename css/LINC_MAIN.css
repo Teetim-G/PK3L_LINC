@@ -3,10 +3,14 @@ p  { text-align: center;}
 ul{list-style: none;}
 h4{position: relative;border-bottom: 1px solid black;padding-bottom: 15px}
 body{margin:0;height: 100%}
-
-#wrap{margin:0 auto;max-width: 1200px}
-#header{width: 100%}
-#container{height: 100%;padding: 20px; display: block;overflow: hidden;}
+header {
+  padding: 100px 0 0;
+}
+section {
+  padding: 150px 0;
+}
+#wrap{margin:0 auto;}
+#container{height: 100%;padding: 20px; display: block;overflow: hidden;margin: 0 auto}
 #footer{width: 100%;border-top: 1px solid #979797;}
 #M_Left{height: 100%;float: left;}
 #M_Right{height: 100%;float: right}

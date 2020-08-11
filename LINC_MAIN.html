@@ -18,7 +18,7 @@
 <body>
   <div id="wrap">
     <div id="header">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
         <a class="navbar-brand" href="#">Logo Here</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -47,31 +47,39 @@
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">비활성화</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-10">
-            <input id="Search_bar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" >
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search"  placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Search</button>
           </form>
-          <button class="btn btn-outline-primary" style="margin-left: 30px">로그인</button>
+          <button class="btn btn-outline-primary my-2 my-sm-0 mx-2">로그인</button>
         </div>
       </nav>
 
     </div>
-    <div id="container">
-      <div class="column_left" id="M_Left">
-        <div class="M_Top_con">
+    <div id="container" class="container row">
+      <div class="column_left row col-xl-9 col-lg-9 col-md-9 col-sm-12" id="M_Left">
+        <div class="M_Top_con ">
           <div id="M_list_top">
             <h4>사진이 있는 콘텐츠</h4>
-            <ul class="list_content">
-              <li class="list_content_pic"><a><img src="https://via.placeholder.com/150x150.png"/><p>안녕</p></a></li>
-              <li class="list_content_pic"><a><img src="https://via.placeholder.com/150x150.png"/><p>하쇼</p></a></li>
-              <li class="list_content_pic"><a><img src="https://via.placeholder.com/150x150.png"/><p>제목</p></a></li>
-              <li class="list_content_pic"><a><img src="https://via.placeholder.com/150x150.png"/><p>입니다.</p></a></li>
+            <ul class="list_content ">
+              <li class="list_content_pic "><a><img src="https://via.placeholder.com/150x150.png" />
+                  <p>안녕</p>
+                </a></li>
+              <li class="list_content_pic "><a><img src="https://via.placeholder.com/150x150.png" />
+                  <p>하쇼</p>
+                </a></li>
+              <li class="list_content_pic d-none d-lg-block"><a><img src="https://via.placeholder.com/150x150.png" />
+                  <p>제목</p>
+                </a></li>
+              <li class="list_content_pic d-none d-xl-block"><a><img src="https://via.placeholder.com/150x150.png" />
+                  <p>입니다.</p>
+                </a></li>
             </ul>
           </div>
         </div>
 
-        <div class="M_con">
-          <div id="M_list">
+        <div class="M_con row">
+          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
             <h4>게시판 제목</h4>
             <ul class="list_content">
               <li>요소 1</li>
@@ -83,7 +91,7 @@
               <li>요소 7</li>
             </ul>
           </div>
-          <div id="M_list">
+          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
             <h4>게시판 제목</h4>
             <ul class="list_content">
               <li>요소 1</li>
@@ -95,70 +103,65 @@
               <li>요소 7</li>
             </ul>
           </div>
-
+          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
+            <h4>게시판 제목</h4>
+            <ul class="list_content">
+              <li>요소 1</li>
+              <li>요소 2</li>
+              <li>요소 3</li>
+              <li>요소 4</li>
+              <li>요소 5</li>
+              <li>요소 6</li>
+              <li>요소 7</li>
+            </ul>
+          </div>
+          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
+            <h4>게시판 제목</h4>
+            <ul class="list_content">
+              <li>요소 1</li>
+              <li>요소 2</li>
+              <li>요소 3</li>
+              <li>요소 4</li>
+              <li>요소 5</li>
+              <li>요소 6</li>
+              <li>요소 7</li>
+            </ul>
+          </div>
+          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
+            <h4>게시판 제목</h4>
+            <ul class="list_content">
+              <li>요소 1</li>
+              <li>요소 2</li>
+              <li>요소 3</li>
+              <li>요소 4</li>
+              <li>요소 5</li>
+              <li>요소 6</li>
+              <li>요소 7</li>
+            </ul>
+          </div>
+          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
+            <h4>게시판 제목</h4>
+            <ul class="list_content">
+              <li>요소 1</li>
+              <li>요소 2</li>
+              <li>요소 3</li>
+              <li>요소 4</li>
+              <li>요소 5</li>
+              <li>요소 6</li>
+              <li>요소 7</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="M_con">
-          <div id="M_list">
-            <h4>게시판 제목</h4>
-            <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
-            </ul>
-          </div>
-          <div id="M_list">
-            <h4>게시판 제목</h4>
-            <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
-            </ul>
-          </div>
 
-        </div>
-        <div class="M_con">
-          <div id="M_list">
-            <h4>게시판 제목</h4>
-            <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
-            </ul>
-          </div>
-          <div id="M_list">
-            <h4>게시판 제목</h4>
-            <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
-            </ul>
-          </div>
 
-        </div>
       </div>
-      <div class="column_right" id="M_Right">
+      <div class="column_right d-none d-md-block col-xl-3 col-lg-3 col-md-3" id="M_Right">
         <div id="account">
           <button id="btn_login" type="button" class="btn btn-success btn-lg  "> 로그인 </button>
         </div>
         <div id="banner">
-          <img src="https://via.placeholder.com/312x300.png">
+          <img src="https://via.placeholder.com/250x250.png">
         </div>
         <div id="Rank">
           <div id="Rank_title">
@@ -179,9 +182,9 @@
         </div>
       </div>
     </div>
-    <div id="footer">
+    <footer id="footer">
       <p>이곳은 Footer 입니다.</p>
-    </div>
+    </footer>
   </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

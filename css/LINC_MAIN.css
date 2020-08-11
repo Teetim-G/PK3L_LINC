@@ -1,0 +1,23 @@
+h1 { color: red; }
+p  { text-align: center;}
+div{  margin: 0 auto}
+ul{list-style: none;}
+h4{position: relative;border-bottom: 1px solid black;padding-bottom: 15px}
+#wrap{width: 1080px;height: auto;}
+#header{height: auto;width: 100%}
+#container{height: auto;padding: 20px; display: inline-block;}
+#footer{height: 340px;position: relative;width: 100%;border-top: 1px solid #979797}
+#M_Left{ width: 69%;height: 100%;float: left;}
+#M_Right{width: 30%;height: 100%;float: right;}
+#account{background-color: #9f9f9f;padding: 30px}
+.list_content{display: inline;}
+.M_Top_con{height: auto;display: inline-block;width: 100%;}
+.M_con{height: auto;;display: inline-block;width: 100%;}
+#btn_login{text-align: center;display: block;margin: 0 auto;width: 75%;}
+#M_list{display: block;float: left;width: 45%;margin: 10px}
+#M_list_top{width: auto;}
+#Search_bar{width: 500px}
+.list_content_pic{display: inline-block;float: left;margin: 9px}
+#Rank_title{margin : 20px;text-align: left;border-bottom: 1px solid black}
+#Rank{border: 1px solid grey;margin-top: 20px}
+#banner{margin-top: 20px}

@@ -2,21 +2,72 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <title>MyPage</title>
+    <!-- Bootstrap CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>This is MyPage</title>
+    <link rel="stylesheet" href="css\LINC_MyPage.css">
   </head>
   <body>
-    <h1>마이페이지입니다.</h1>
+    <div id="wrap"class="container">
+      <div id="content" class="row profile">
+        <div class="col-lg-9 p-5">
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+              <div class="">
+                <h5 class="pb-3">회원 정보</h5>
+                <p class="my-3 pl-4">아이디 <input type="text" name="Id" value="아이디"  disabled="disabled"></p>
+
+                <p class="my-3 pl-4">닉네임 <input type="text" name="NickName" value="닉네임"><button type="button" name="btnNNCh" class="btn btn-sm btn-primary mx-3">변경</button></p>
+
+                <div class="my-3 pl-4">
+                   <p>
+                      이메일 <input class="col-2"type="text" name="email" value="Id"> @ <input class="col-2" type="text"name="address" value="gmail.com">
+                      <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          직접 입력
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">직접 입력</a>
+                          <a class="dropdown-item" href="#">gmail.com</a>
+                          <a class="dropdown-item" href="#">naver.com</a>
+                        </div>
+                      </div>
+                      <button type="button" name="btnNNCh" class="btn btn-sm btn-primary mx-3"> 이메일 재인증 </button>
+                    </p>
+                </div>
+
+              </div>
+            </div>
+            <div class="tab-pane fade" id="list-post" role="tabpanel" aria-labelledby="list-post-list">...</div>
+            <div class="tab-pane fade" id="list-withdrawal" role="tabpanel" aria-labelledby="list-withdrawal-list">...</div>
+          </div>
+        </div>
+        <div class="col-lg-3 p-5">
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">회원정보 관리</a>
+            <a class="list-group-item list-group-item-action" id="list-post-list" data-toggle="list" href="#list-post" role="tab" aria-controls="post">내 글 관리</a>
+            <a class="list-group-item list-group-item-action" id="list-withdrawal-list" data-toggle="list" href="#list-withdrawal" role="tab" aria-controls="withdrawal">회원 탈퇴</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/scrolling-nav.js"></script>
   </body>
 </html>

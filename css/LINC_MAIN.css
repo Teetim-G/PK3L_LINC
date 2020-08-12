@@ -3,12 +3,6 @@ p  { text-align: center;}
 ul{list-style: none;}
 h4{position: relative;border-bottom: 1px solid black;padding-bottom: 15px}
 body{margin:0;height: 100%}
-header {
-  padding: 100px 0 0;
-}
-section {
-  padding: 150px 0;
-}
 #wrap{margin:0 auto;}
 #container{height: 100%;padding: 20px; display: block;overflow: hidden;margin: 0 auto}
 #footer{width: 100%;border-top: 1px solid #979797;}

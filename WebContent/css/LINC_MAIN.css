@@ -1,0 +1,21 @@
+h1 { color: red; }
+p  { text-align: center;}
+ul{list-style: none;}
+h4{position: relative;border-bottom: 1px solid black;padding-bottom: 15px}
+body{margin:0;height: 100%}
+#wrap{margin:0 auto;}
+#container{height: 100%;padding: 20px; display: block;overflow: hidden;margin: 0 auto}
+#footer{width: 100%;border-top: 1px solid #979797;}
+#M_Left{height: 100%;float: left;}
+#M_Right{height: 100%;float: right}
+#account{width: 100%;background-color: #9f9f9f;padding: 20px 0}
+.list_content{display: block;}
+.M_Top_con{height: auto;display: block;width: 100%;}
+.M_con{height: auto;display: block;width: 100%;}
+#btn_login{text-align: center;display: block;margin: 0 auto;width: 75%;}
+#M_list{display: block;float: left;width: 45%;}
+#M_list_top{width: auto;}
+.list_content_pic{float: left;margin-right: 25px}
+#Rank_title{margin : 20px;text-align: left;border-bottom: 1px solid black}
+#Rank{border: 1px solid grey;margin-top: 20px}
+#banner{margin-top: 20px}

@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en">
+<html lang="kr">
   <head>
     
     <title>This is MyPage</title>
 
 
 	<%@ include file="BSLoad.jsp" %>
+	
   </head>
    <body>
     <div id="wrap"class="container">

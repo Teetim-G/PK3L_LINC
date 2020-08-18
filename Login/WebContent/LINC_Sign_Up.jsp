@@ -23,27 +23,30 @@
       <div class="row">
          <div class="col-md-4 mx-auto">
             <div class="myform form ">
-               <form action="" method="post" name="login">
+               <form action="SendMail.jsp" method="post" name="login">
                   <div class="form-group">
-                     <input type="text" name="name" id="name" class="form-control my-input" placeholder="ID">
+                     <input type="text" name="idial" id="name" class="form-control my-input" placeholder="ID">
                   </div>
                   <div class="form-group">
-                     <input type="password" name="email" id="email" class="form-control my-input" placeholder="PassWord">
+                     <input type="password" name="password" id="email" class="form-control my-input" placeholder="PassWord">
                   </div>
                   <div class="form-group">
-                     <input type="password" name="phone" id="phone"  class="form-control my-input" placeholder="PassWord-ReInput">
+                     <input type="password" name="cpassword" id="phone"  class="form-control my-input" placeholder="cPassWord">
                   </div>
 				  <div class="form-group">
-                     <input type="text" name="phone" id="phone"  class="form-control my-input" placeholder="NickName">
+                     <input type="text" name="nickname" id="phone"  class="form-control my-input" placeholder="NickName">
                   </div>
                   <div class="form-group">
-                     <input type="email" name="phone" id="phone"  class="form-control my-input" placeholder="E-Mail">
+                     <input type="email" name="to" id="phone"  class="form-control my-input" placeholder="E-Mail">
                   </div>
                   <div class="form-group">
                      <input type="text" name="phone" id="phone"  class="form-control my-input" placeholder="PhoneNum(Choose)">
                   </div>
                   <div class="text-center ">
                      <button type="submit" class=" btn btn-block send-button tx-tfm">계정 생성</button>
+                     <input type="hidden" name="from" value="powersource@naver.com"/>
+                     <input type="hidden" name="subject" value="인증메일"/>
+                     <input type="hidden" name="content" value="<%=(int)(Math.random()*99999)%>"/>
                   </div>
                </form>
             </div>

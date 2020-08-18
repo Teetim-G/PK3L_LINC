@@ -9,7 +9,7 @@
 <body>
 <%@include file="DBCONN.jsp"%>
 <%
-String sSQL = "select * from user_stat";
+String sSQL = "select * from user_stat where s_ID='admin'";
 PreparedStatement pstmt=null;
 ResultSet rs = null;
 %>
@@ -18,7 +18,7 @@ try{
 		pstmt=conn.prepareStatement(sSQL);
 		rs=pstmt.executeQuery();
 		rs.next();
-		String myName = rs.getString("s_ID");
+		String myName = rs.getString("s_EMail");
 %>
 <%=myName%>
 <%		

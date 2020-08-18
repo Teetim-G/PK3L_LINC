@@ -49,9 +49,9 @@
                   <label for="input_pwd" class="mr-2">비밀번호  설정</label>
                 </div>
                 <div class="float-left form-group form-inline col-7">
-                  <input id="input_pwd" class="form-control"type="text" name="password" value=""><label for="input_pwd" class="ml-2">현재 비밀번호 입력</label><br><br>
-                  <input id="input_chpwd" class="form-control"type="text" name="chpassword" value=""><label for="input_chpwd" class="ml-2">변경할 비밀번호 입력</label><br><br>
-                  <input id="input_chpwdch" class="form-control"type="text" name="password" value=""><label for="input_chpwdch" class="ml-2">변경할 비밀번호 확인</label><br><br>
+                  <input id="input_pwd" class="form-control"type="password" name="password" value=""><label for="input_pwd" class="ml-2">현재 비밀번호 입력</label><br><br>
+                  <input id="input_chpwd" class="form-control"type="password" name="chpassword" value=""><label for="input_chpwd" class="ml-2">변경할 비밀번호 입력</label><br><br>
+                  <input id="input_chpwdch" class="form-control"type="password" name="password" value=""><label for="input_chpwdch" class="ml-2">변경할 비밀번호 확인</label><br><br>
                 </div>
                 <button type="button" name="btnChpwd"class="btn btn-xl btn-primary float-right">비밀번호 변경</button>
 
@@ -72,7 +72,8 @@
                   <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th scope="col"><input type="checkbox"></th>
+                      
+                        <th scope="col"><input type="checkbox" class="pchk" id="post_chk_all"></th>
                         <th scope="col">게시판</th>
                         <th scope="col">제목</th>
                         <th scope="col">작성일</th>
@@ -80,19 +81,19 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row"><input type="checkbox"></th>
+                        <th scope="row"><input type="checkbox" class="pchk" name="pchk" id="pchk1"></th>
                         <td>자유</td>
                         <td>글제목1</td>
                         <td>20.08.14</td>
                       </tr>
                       <tr>
-                        <th scope="row"><input type="checkbox"></th>
+                        <th scope="row"><input type="checkbox" class="pchk" name="pchk" id="pchk2"></th>
                         <td>자유</td>
                         <td>글제목2</td>
                         <td>20.08.13</td>
                       </tr>
                       <tr>
-                        <th scope="row"><input type="checkbox"></th>
+                        <th scope="row"><input type="checkbox" class="pchk" name="pchk" id="pchk3"></th>
                         <td>게임</td>
                         <td>글제목3</td>
                         <td>20.08.10</td>
@@ -126,7 +127,7 @@
                   <table class="table table-hover ">
                     <thead>
                       <tr>
-                        <th scope="col"><input type="checkbox"></th>
+                        <th scope="col"><input type="checkbox" class="cchk" id="comt_chk_all"></th>
                         <th scope="col">게시판</th>
                         <th scope="col">댓글내용</th>
                         <th scope="col">작성일</th>
@@ -134,19 +135,19 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row"><input type="checkbox"></th>
+                        <th scope="row"><input type="checkbox" class="cchk" name="cchk" id="cchk1"></th>
                         <td>자유</td>
                         <td>글내용</td>
                         <td>20.08.14</td>
                       </tr>
                       <tr>
-                        <th scope="row"><input type="checkbox"></th>
+                        <th scope="row"><input type="checkbox" class="cchk" name="cchk" id="cchk2"></th>
                         <td>자유</td>
                         <td>글내용</td>
                         <td>20.08.13</td>
                       </tr>
                       <tr>
-                        <th scope="row"><input type="checkbox"></th>
+                        <th scope="row"><input type="checkbox" class="cchk" name="cchk" id="cchk3"></th>
                         <td>게임</td>
                         <td>글내용</td>
                         <td>20.08.10</td>
@@ -184,15 +185,15 @@
               <h5 class="pb-3">회원 탈퇴</h5>
               <hr>
               <form class="text-center">
-                <label for="InputId">현재 비밀번호 입력</label>
+                <label for="curpwd">현재 비밀번호 입력</label>
 
                 <div class="form-group form-inline">
-                  <input id="curpwd" class="form-control mx-auto"type="text" name="curpwd" value=""><br>
+                  <input id="curpwd" class="form-control mx-auto"type="password" name="curpwd" value=""><br>
                 </div>
-                  <label for="InputId"class="text-danger">"회원 탈퇴"를 입력해 주세요.</label>
+                  <label for="wd"class="text-danger">"회원 탈퇴"를 입력해 주세요.</label>
 
                 <div class="form-group form-inline">
-                  <input id="curpwd" class="form-control mx-auto"type="text" name="curpwd" value=""><br>
+                  <input id="wd" class="form-control mx-auto"type="text" name="curpwd" value=""><br>
                 </div>
                 <button type="button" name="button"class="btn btn-danger">회원 탈퇴</button>
               </form>
@@ -212,5 +213,49 @@
     
 	<%@ include file="footer.jsp" %>
 	<%@ include file="JsLoad.jsp" %>
+	
+	
+	<script>
+		// 체크박스 전체선택 및 전체해제
+		$("#post_chk_all").click(function(){
+		    if($("#post_chk_all").is(":checked")){
+		        $(".pchk").prop("checked", true);
+		    }
+		    else{
+		        $(".pchk").prop("checked", false);
+		    }
+		});
+		// 한개의 체크박스 선택 해제시 전체선택 체크박스도 해제
+		$(".pchk").click(function(){
+		    if($("input[name='pchk']:checked").length == 3){
+		        $("#post_chk_all").prop("checked", true);
+		    }else{
+		        $("#post_chk_all").prop("checked", false);
+		    }
+		});
+		// 체크박스 전체선택 및 전체해제
+		$("#comt_chk_all").click(function(){
+		    if($("#comt_chk_all").is(":checked")){
+		        $(".cchk").prop("checked", true);
+		    }
+		    else{
+		        $(".cchk").prop("checked", false);
+		    }
+		});
+		// 한개의 체크박스 선택 해제시 전체선택 체크박스도 해제
+		$(".cchk").click(function(){
+		    if($("input[name='cchk']:checked").length == 3){
+		        $("#comt_chk_all").prop("checked", true);
+		    }else{
+		        $("#comt_chk_all").prop("checked", false);
+		    }
+		});
+		
+		$(".list-group-item").click(function(){
+			$(".pchk").prop("checked", false);
+			$(".cchk").prop("checked", false);
+		});
+
+	</script>
   </body>
 </html>

@@ -13,14 +13,15 @@
 <body>
 <div class="simple-login-container">
     <h2>로고 들어갈 자리</h2>
+    <form action="LoginProcess.jsp" method="post">
     <div class="row">
         <div class="col-md-12 form-group">
-            <input type="text" class="form-control" placeholder="ID">
+            <input type="text"name="userid" class="form-control" placeholder="ID">
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 form-group">
-            <input type="password" placeholder="Password" class="form-control">
+            <input type="password"name="userpwd" placeholder="Password" class="form-control">
         </div>
     </div>
     <div class="row">
@@ -28,8 +29,9 @@
             <input type="submit" class="btn btn-block btn-login"value ="로그인" placeholder="dddd" >
         </div>
     </div>
+    </form>
     <div class="row">
-        <a style="margin-left:50px;"href="https://codeblush.com/category/wordpress">회원가입</a>
+        <a style="margin-left:50px;"href="LINC_Sign_Up.jsp">회원가입</a>
         <a href="https://codeblush.com/category/wordpress">아이디/비밀번호 찾기</a>
     </div>
 </div>

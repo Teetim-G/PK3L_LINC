@@ -8,8 +8,25 @@
 
 
 	<%@ include file="BSLoad.jsp" %>
-	
+	<%@include file="DBCONN.jsp"%>
   </head>
+ <%
+String sSQL = "select * from user_stat where s_ID='admin'";
+PreparedStatement pstmt=null;
+ResultSet rs = null;
+%>
+<%
+try{
+		pstmt=conn.prepareStatement(sSQL);
+		rs=pstmt.executeQuery();
+		rs.next();
+		String myName = rs.getString("s_ID");
+		String myNick = rs.getString("s_NickName");
+		String myPwd = rs.getString("s_Pwd");
+		String myEmail = rs.getString("s_EMail");
+		
+		
+%>
    <body>
     <div id="wrap"class="container">
     	<%@ include file="header.jsp" %>
@@ -24,18 +41,18 @@
               <form>
                 <label for="InputId">아이디</label>
                 <div class="form-group form-inline">
-                  <input type="text" class="form-control mx-sm-3 mb-2" id="InputId" placeholder="아이디" readonly>
+                  <input type="text" class="form-control mx-sm-3 mb-2" id="InputId" placeholder="<%=myName%>" readonly>
                 </div>
 
 
                 <label for="InputNick">닉네임</label>
                 <div class="form-group form-inline mb-2">
-                  <input type="text" class="form-control mx-sm-3 mb-2" id="InputNick" placeholder="닉네임">
+                  <input type="text" class="form-control mx-sm-3 mb-2" id="InputNick" placeholder="<%=myNick%>">
                   <button type="submit" class="btn btn-primary mb-2 form-control">변경</button>
                 </div>
                 <label for="InputEmail">이메일</label>
                 <div class="form-group form-inline mb-2">
-                  <input type="email" class="form-control mx-sm-3 mb-2" id="InputEmail" placeholder="example@email.com">
+                  <input type="email" class="form-control mx-sm-3 mb-2" id="InputEmail" placeholder="<%=myEmail%>">
                   <button type="submit" class="btn btn-primary mb-2 form-control">이메일 재인증</button>
                 </div>
 
@@ -49,9 +66,22 @@
                   <label for="input_pwd" class="mr-2">비밀번호  설정</label>
                 </div>
                 <div class="float-left form-group form-inline col-7">
-                  <input id="input_pwd" class="form-control"type="password" name="password" value=""><label for="input_pwd" class="ml-2">현재 비밀번호 입력</label><br><br>
-                  <input id="input_chpwd" class="form-control"type="password" name="chpassword" value=""><label for="input_chpwd" class="ml-2">변경할 비밀번호 입력</label><br><br>
-                  <input id="input_chpwdch" class="form-control"type="password" name="password" value=""><label for="input_chpwdch" class="ml-2">변경할 비밀번호 확인</label><br><br>
+                  <input id="input_pwd" class="form-control mb-3"type="password" name="password" value=""><label for="input_pwd" class="ml-2 mb-3">현재 비밀번호 입력</label>
+                  <div id="wrpwd" class="alert alert-danger d-none" role="alert">
+				  현재 비밀번호가 일치하지 않습니다!
+				</div>
+				<div id="copwd" class="alert alert-primary d-none" role="alert">
+				  현재 비밀번호와 일치합니다!
+				</div>
+                  <input id="input_chpwd" class="form-control mb-3"type="password" name="chpassword" value=""><label for="input_chpwd" class="ml-2 mb-3">변경할 비밀번호 입력</label>
+                  
+                  <input id="input_chpwdch" class="form-control mb-3"type="password" name="password" value=""><label for="input_chpwdch" class="ml-2 mb-3">변경할 비밀번호 확인</label>
+                  <div id="wrChpwd" class="alert alert-danger d-none" role="alert">
+				  변경할 비밀번호가 일치하지 않습니다!
+				</div>
+				<div id="coChpwd" class="alert alert-primary d-none" role="alert">
+				  변경할 비밀번호와 일치합니다!
+				</div>
                 </div>
                 <button type="button" name="btnChpwd"class="btn btn-xl btn-primary float-right">비밀번호 변경</button>
 
@@ -251,11 +281,43 @@
 		    }
 		});
 		
-		$(".list-group-item").click(function(){
+		$(".list-group-item").click(function(){// 탭 변경시 체크박스값 초기화
 			$(".pchk").prop("checked", false);
 			$(".cchk").prop("checked", false);
+		});
+		
+		$("#input_pwd").on("propertychange change keyup paste input", function() {// 텍스트값이 변경되었을때를 감지하여 발생하는 이벤트
+		    var inputPwd = $(this).val();
+		    $('#wrpwd').removeClass('d-none');
+			var realpwd = "<%=myPwd%>";
+		    if(md5(inputPwd) == realpwd) {
+		    	$('#copwd').removeClass('d-none');
+		    	$('#wrpwd').addClass('d-none');
+		        return;
+		    }
+		});
+		$("#input_chpwdch").on("propertychange change keyup paste input", function() {// 텍스트값이 변경되었을때를 감지하여 발생하는 이벤트
+		    var chPwdch = $(this).val();
+		    var chPwd = $('#input_chpwd').val();
+		    $('#wrChpwd').removeClass('d-none');
+		    if(chPwdch == chPwd) {
+		    	$('#coChpwd').removeClass('d-none');
+		    	$('#wrChpwd').addClass('d-none');
+		        return;
+		    }
 		});
 
 	</script>
   </body>
+  
+<%		
+	}catch(SQLException e){
+		out.print(e);
+	}finally{
+		if(pstmt!=null)
+			pstmt.close();
+		if(conn!=null)
+			conn.close();
+	}
+%>
 </html>

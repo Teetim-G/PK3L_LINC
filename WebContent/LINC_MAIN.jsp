@@ -10,7 +10,11 @@
   <title>WELCOME!! MAINPAGE</title>
 
   <%@ include file="BSLoad.jsp" %>
+  <%@include file="DBCONN.jsp"%>
 </head>
+
+
+
 
 <body id="page-top">
   <%@ include file="header.jsp" %>
@@ -25,7 +29,7 @@
                   <p>안녕</p>
                 </a></li>
               <li class="list_content_pic float-left mx-2"><a><img class="mb-2" src="https://via.placeholder.com/150x150.png" />
-                  <p>하쇼</p>
+                  <p>하세요</p>
                 </a></li>
               <li class="list_content_pic float-left mx-2 d-none d-lg-block"><a><img class="mb-2" src="https://via.placeholder.com/150x150.png" />
                   <p>제목</p>
@@ -39,17 +43,49 @@
 
         <div class="M_con row">
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h4>게시판 제목</h4><hr>
+            <h4>자유</h4><hr>
             <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
+<%
+String postSQL = "select s_Title, s_MkDate from post_state where Post_Category_n_PostNum = 0 order by s_MkDate;";
+PreparedStatement pstmt=null;
+ResultSet rs = null;
+try{
+		pstmt=conn.prepareStatement(postSQL);
+		rs=pstmt.executeQuery();
+		String postTitle = null;
+		int cnt = 0;
+		while(rs.next()){
+			postTitle = rs.getString("s_Title");
+%>
+				<li><%=postTitle%></li>
+<%
+			cnt++;
+			if(cnt == 7){
+				break;
+			}
+			
+			
+		}
+		while(cnt<7){
+%>
+			<li>요소<%=cnt+1%></li>
+<%	
+		cnt++;
+		}
+%>
             </ul>
           </div>
+
+<%		
+	}catch(SQLException e){
+		out.print(e);
+	}finally{
+		if(pstmt!=null)
+			pstmt.close();
+		if(conn!=null)
+			conn.close();
+	}
+%>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
             <h4>게시판 제목</h4><hr>
             <ul class="list_content">

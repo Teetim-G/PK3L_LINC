@@ -18,7 +18,9 @@ try{
 		pstmt=conn.prepareStatement(sSQL);
 		rs=pstmt.executeQuery();
 		rs.next();
+		rs.next();
 		String myName = rs.getString("s_ID");
+		
 %>
 <%=myName%>
 <%		

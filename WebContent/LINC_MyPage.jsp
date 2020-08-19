@@ -9,6 +9,14 @@
 
 	<%@ include file="BSLoad.jsp" %>
 	<%@include file="DBCONN.jsp"%>
+	<script>
+
+	function passwdModify(form) {
+		form.method="POST";
+		form.action="passwdModifyAction.jsp";
+		form.submit();
+	}
+	</script>
   </head>
  <%
 String sSQL = "select * from user_stat where s_ID='admin'";
@@ -59,7 +67,7 @@ try{
               </form>
             </div>
             <div class="tab-pane fade" id="list-chpwd" role="tabpanel" aria-labelledby="list-chpwd-list">
-              <div class="">
+              <form id="passform">
                 <h5 class="pb-3">비밀번호 변경</h5>
                 <hr>
                 <div class="float-left col-4 col-sm-3">
@@ -75,7 +83,7 @@ try{
 				</div>
                   <input id="input_chpwd" class="form-control mb-3"type="password" name="chpassword" value=""><label for="input_chpwd" class="ml-2 mb-3">변경할 비밀번호 입력</label>
                   
-                  <input id="input_chpwdch" class="form-control mb-3"type="password" name="password" value=""><label for="input_chpwdch" class="ml-2 mb-3">변경할 비밀번호 확인</label>
+                  <input id="input_chpwdch" class="form-control mb-3"type="password" name="passwordch" value=""><label for="input_chpwdch" class="ml-2 mb-3">변경할 비밀번호 확인</label>
                   <div id="wrChpwd" class="alert alert-danger d-none" role="alert">
 				  변경할 비밀번호가 일치하지 않습니다!
 				</div>
@@ -83,9 +91,9 @@ try{
 				  변경할 비밀번호와 일치합니다!
 				</div>
                 </div>
-                <button type="button" name="btnChpwd"class="btn btn-xl btn-primary float-right" onclick="Pwd_Change">비밀번호 변경</button>
+                <button id="pwdChange" type="button" name="btnChpwd"class="btn btn-xl btn-primary float-right" onclick="Pwd_Change">비밀번호 변경</button>
 
-              </div>
+              </form>
             </div>
             <div class="tab-pane fade" id="list-post" role="tabpanel" aria-labelledby="list-post-list">
               <div class="">
@@ -307,6 +315,30 @@ try{
 		    	$('#wrChpwd').addClass('d-none');
 		        return;
 		    }
+		});
+
+		$("#pwdChange").click(function(){
+			var curPwd = $('#input_pwd').val();
+			var chPwd = $('#input_chpwd').val();
+			var chPwdch = $('#input_chpwdch').val();
+			var realpwd = "<%=myPwd%>";
+			if(!curPwd || !chPwd || !chPwdch){
+				alert("입력값을 다시 확인해주세요!");
+				return;
+			}
+			if(md5(curPwd) == realpwd) {
+		    	if(chPwd == chPwdch){
+		    		$("#passform").attr("method", "POST");
+		    		$("#passform").attr("action", "passwdModifyAction.jsp");
+		    		$("#passform").submit();
+		    		return;
+		    	}else{
+		    		alert("변경할 비밀번호를 다시 확인해주세요!!");
+		    		return;
+		    	}
+		    	
+		    }
+			alert("현재 비밀번호가 일치하지 않습니다!!");
 		});
 
 	</script>

@@ -18,11 +18,13 @@ try{
 		pstmt=conn.prepareStatement(sSQL);
 		rs=pstmt.executeQuery();
 		rs.next();
-		rs.next();
 		String myName = rs.getString("s_ID");
+		String myPwd = rs.getString("s_Pwd");
+		
 		
 %>
 <%=myName%>
+<%=myPwd %>
 <%		
 	}catch(SQLException e){
 		out.print(e);

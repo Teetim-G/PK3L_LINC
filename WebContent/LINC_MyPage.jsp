@@ -83,7 +83,7 @@ try{
 				  변경할 비밀번호와 일치합니다!
 				</div>
                 </div>
-                <button type="button" name="btnChpwd"class="btn btn-xl btn-primary float-right">비밀번호 변경</button>
+                <button type="button" name="btnChpwd"class="btn btn-xl btn-primary float-right" onclick="Pwd_Change">비밀번호 변경</button>
 
               </div>
             </div>
@@ -289,6 +289,7 @@ try{
 		$("#input_pwd").on("propertychange change keyup paste input", function() {// 텍스트값이 변경되었을때를 감지하여 발생하는 이벤트
 		    var inputPwd = $(this).val();
 		    $('#wrpwd').removeClass('d-none');
+	    	$('#copwd').addClass('d-none');
 			var realpwd = "<%=myPwd%>";
 		    if(md5(inputPwd) == realpwd) {
 		    	$('#copwd').removeClass('d-none');
@@ -300,6 +301,7 @@ try{
 		    var chPwdch = $(this).val();
 		    var chPwd = $('#input_chpwd').val();
 		    $('#wrChpwd').removeClass('d-none');
+	    	$('#coChpwd').addClass('d-none');
 		    if(chPwdch == chPwd) {
 		    	$('#coChpwd').removeClass('d-none');
 		    	$('#wrChpwd').addClass('d-none');

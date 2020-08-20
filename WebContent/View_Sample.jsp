@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+
 <%@include file="DBCONN.jsp"%>
 <%
 String sSQL = "select * from user_stat where s_ID='admin'";
@@ -31,5 +25,3 @@ try{
 			conn.close();
 	}
 %>
-</body>
-</html>

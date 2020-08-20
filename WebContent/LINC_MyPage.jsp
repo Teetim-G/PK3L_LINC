@@ -10,11 +10,15 @@
 	<%@ include file="BSLoad.jsp" %>
 	<%@include file="DBCONN.jsp"%>
 	<script>
-
-	function passwdModify(form) {
-		form.method="POST";
-		form.action="passwdModifyAction.jsp";
-		form.submit();
+	function checkNick(){
+		if(document.chNickform.InputNick.value == ""){
+			alert("입력값을 확인해주세요!");
+			return;
+		}
+		
+		var url = "dupCheck_Nick.jsp?value=" + document.chNickform.InputNick.value;
+		
+		open(url, "닉네임 변경", "toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, width=300, height=200");
 	}
 	</script>
   </head>
@@ -40,13 +44,19 @@ try{
     	<%@ include file="header.jsp" %>
     	
       <h2 class="py-3">MY PAGE</h2>
+      
       <div id="content" class="row profile mb-5">
+      
         <div class="col-lg-9 p-5 border">
+        
           <div class="tab-content" id="nav-tabContent">
+          
             <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+            
               <h5 class="pb-3">회원 정보</h5>
               <hr>
-              <form>
+
+              <div>
                 <label for="InputId">아이디</label>
                 <div class="form-group form-inline">
                   <input type="text" class="form-control mx-sm-3 mb-2" id="InputId" placeholder="<%=myName%>" readonly>
@@ -54,18 +64,43 @@ try{
 
 
                 <label for="InputNick">닉네임</label>
-                <div class="form-group form-inline mb-2">
+                <form class="form-group form-inline mb-2"method="post" name="chNickform" " >
                   <input type="text" class="form-control mx-sm-3 mb-2" id="InputNick" placeholder="<%=myNick%>">
-                  <button type="submit" class="btn btn-primary mb-2 form-control">변경</button>
-                </div>
+                  <button type="button" class="btn btn-primary mb-2 form-control"  data-toggle="modal" data-target="#exampleModal">변경</button>
+                </form>
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">닉네임 변경</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+                
+				  
                 <label for="InputEmail">이메일</label>
                 <div class="form-group form-inline mb-2">
                   <input type="email" class="form-control mx-sm-3 mb-2" id="InputEmail" placeholder="<%=myEmail%>">
                   <button type="submit" class="btn btn-primary mb-2 form-control">이메일 재인증</button>
                 </div>
 
-              </form>
+              </div>
+              
             </div>
+            
+            
             <div class="tab-pane fade" id="list-chpwd" role="tabpanel" aria-labelledby="list-chpwd-list">
               <form id="passform">
                 <h5 class="pb-3">비밀번호 변경</h5>
@@ -76,11 +111,11 @@ try{
                 <div class="float-left form-group form-inline col-7">
                   <input id="input_pwd" class="form-control mb-3"type="password" name="password" value=""><label for="input_pwd" class="ml-2 mb-3">현재 비밀번호 입력</label>
                   <div id="wrpwd" class="alert alert-danger d-none" role="alert">
-				  현재 비밀번호가 일치하지 않습니다!
-				</div>
-				<div id="copwd" class="alert alert-primary d-none" role="alert">
-				  현재 비밀번호와 일치합니다!
-				</div>
+					  현재 비밀번호가 일치하지 않습니다!
+				  </div>
+				  <div id="copwd" class="alert alert-primary d-none" role="alert">
+					  현재 비밀번호와 일치합니다!
+				  </div>
                   <input id="input_chpwd" class="form-control mb-3"type="password" name="chpassword" value=""><label for="input_chpwd" class="ml-2 mb-3">변경할 비밀번호 입력</label>
                   
                   <input id="input_chpwdch" class="form-control mb-3"type="password" name="passwordch" value=""><label for="input_chpwdch" class="ml-2 mb-3">변경할 비밀번호 확인</label>
@@ -91,7 +126,7 @@ try{
 				  변경할 비밀번호와 일치합니다!
 				</div>
                 </div>
-                <button id="pwdChange" type="button" name="btnChpwd"class="btn btn-xl btn-primary float-right" onclick="Pwd_Change">비밀번호 변경</button>
+                <button id="pwdChange" type="button" name="btnChpwd"class="btn btn-xl btn-primary float-right" onclick="">비밀번호 변경</button>
 
               </form>
             </div>
@@ -100,7 +135,16 @@ try{
                 <h5 class="pb-3">작성글 관리</h5>
                 <hr>
 
-              </div>
+              </div><%-- sSQL = "select * from post_state where User_Stat_s_ID = " + session.getAttribute("userid") ; --%>
+<%
+				sSQL = "select * from post_state where User_Stat_s_ID = 'admin'" ;
+                pstmt=conn.prepareStatement(sSQL);
+                rs=pstmt.executeQuery();
+                String Title;
+                String Date;
+                int Board;
+                int cntPost=0;
+%>
               <div class="list-group list-group-horizontal flex-fill" id="list-tab_post" role="tablist">
                 <a class="list-group-item list-group-item-action active py-2" id="list-mypost-list" data-toggle="list" href="#list-mypost" role="tab" aria-controls="mypost">게시글 관리</a>
                 <a class="list-group-item list-group-item-action py-2" id="list-mycomment-list" data-toggle="list" href="#list-mycomment" role="tab" aria-controls="mycomment">댓글 관리</a>
@@ -118,24 +162,23 @@ try{
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                    <%
+                    while(rs.next()){
+                    	Title = rs.getString("s_Title");
+                    	Date = rs.getString("s_MkDate");
+                    	Board = rs.getInt("Post_Category_n_PostNum");
+                    	cntPost++;
+                    	%>
+                    	<tr>
                         <th scope="row"><input type="checkbox" class="pchk" name="pchk" id="pchk1"></th>
                         <td>자유</td>
-                        <td>글제목1</td>
-                        <td>20.08.14</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><input type="checkbox" class="pchk" name="pchk" id="pchk2"></th>
-                        <td>자유</td>
-                        <td>글제목2</td>
-                        <td>20.08.13</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><input type="checkbox" class="pchk" name="pchk" id="pchk3"></th>
-                        <td>게임</td>
-                        <td>글제목3</td>
-                        <td>20.08.10</td>
-                      </tr>
+                        <td><%=Title %></td>
+                        <td><%=Date %></td>
+                      	</tr>
+                    	<%
+                    }
+                    
+                    %>
                     </tbody>
                   </table>
                   <div class="">
@@ -171,25 +214,31 @@ try{
                         <th scope="col">작성일</th>
                       </tr>
                     </thead>
+                    <%
+                    sSQL = "select * from comment where s_CommentUser = 'admin'" ;
+                    pstmt=conn.prepareStatement(sSQL);
+                    rs=pstmt.executeQuery();
+                    String cmt;
+                    int cntCmt=0;
+                    %>
                     <tbody>
-                      <tr>
+                    <%
+                    while(rs.next()){
+                    	cmt = rs.getString("s_Comment");
+                    	Date = rs.getString("s_Day");
+                    	Board = rs.getInt("Post_State_n_PostNum");
+                    	cntCmt++;
+                    	%>
+                    	<tr>
                         <th scope="row"><input type="checkbox" class="cchk" name="cchk" id="cchk1"></th>
-                        <td>자유</td>
-                        <td>글내용</td>
-                        <td>20.08.14</td>
+                        <td><%=Board %></td>
+                        <td><%=cmt %></td>
+                        <td><%=Date %></td>
                       </tr>
-                      <tr>
-                        <th scope="row"><input type="checkbox" class="cchk" name="cchk" id="cchk2"></th>
-                        <td>자유</td>
-                        <td>글내용</td>
-                        <td>20.08.13</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><input type="checkbox" class="cchk" name="cchk" id="cchk3"></th>
-                        <td>게임</td>
-                        <td>글내용</td>
-                        <td>20.08.10</td>
-                      </tr>
+                    	<%
+                    }
+                    
+                    %>
                     </tbody>
                   </table>
 
@@ -265,7 +314,7 @@ try{
 		});
 		// 한개의 체크박스 선택 해제시 전체선택 체크박스도 해제
 		$(".pchk").click(function(){
-		    if($("input[name='pchk']:checked").length == 3){
+		    if($("input[name='pchk']:checked").length == <%=cntPost%>){
 		        $("#post_chk_all").prop("checked", true);
 		    }else{
 		        $("#post_chk_all").prop("checked", false);
@@ -282,7 +331,7 @@ try{
 		});
 		// 한개의 체크박스 선택 해제시 전체선택 체크박스도 해제
 		$(".cchk").click(function(){
-		    if($("input[name='cchk']:checked").length == 3){
+		    if($("input[name='cchk']:checked").length == <%=cntCmt%>){
 		        $("#comt_chk_all").prop("checked", true);
 		    }else{
 		        $("#comt_chk_all").prop("checked", false);
@@ -329,7 +378,7 @@ try{
 			if(md5(curPwd) == realpwd) {
 		    	if(chPwd == chPwdch){
 		    		$("#passform").attr("method", "POST");
-		    		$("#passform").attr("action", "passwdModifyAction.jsp");
+		    		$("#passform").attr("action", "");
 		    		$("#passform").submit();
 		    		return;
 		    	}else{

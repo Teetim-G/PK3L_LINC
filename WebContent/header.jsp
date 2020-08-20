@@ -37,7 +37,20 @@
               <input class="form-control mr-sm-2" type="search"  placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit" >Search</button>
             </form>
-            <button class="btn btn-outline-primary my-2 my-sm-0 mx-2" onclick="location.href='LINC_MyPage.jsp'">로그인</button>
+<%      
+			if(session.getAttribute("userid")==null){
+%>
+            <button class="btn btn-outline-primary my-2 my-sm-0 mx-2" onclick="location.href='LINC_Login.jsp'">로그인</button>
+<%
+			}else{
+%>
+			<div id="profile" class=" text-center">
+     			<a href="LINC_MyPage.jsp" class="text-center text-white mx-2"><%=session.getAttribute("usernick") %></a>
+		     	<button class="btn btn-sm btn-secondary " type="button" onclick="location.href='LINC_Logout.jsp'" >로그아웃</button>
+		     </div>
+<%
+			}
+%>
           </div>
         </div>
 

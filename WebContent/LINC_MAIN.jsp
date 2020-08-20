@@ -200,11 +200,14 @@ try{
 
       </div>
       <div class="column_right d-none d-md-block col-4" id="M_Right">
-        <div id="account" class="px-3 py-4 border text-center">
-          <button id="btn_login" type="button" class="btn btn-secondary btn-lg mb-2 w-100 " onclick="location.href='LINC_MyPage.jsp'"> 로그인 </button>
-          <div class="font-weight-light float-none"> 
+<%
+	if(session.getAttribute("userid")==null){
+%>
+		<div id="account" class="px-3 py-4 border text-center">
+          <button id="btn_login" type="button" class="btn btn-secondary btn-lg mb-2 w-100 " onclick="location.href='LINC_Login.jsp'"> 로그인 </button>
+          <div class="font-weight-light float-none  "> 
           	
-			<a class="float-left">
+			<a class="float-left text-reset" href="LINC_Sign_Up.jsp">
 			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 			  <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
 			</svg>
@@ -213,14 +216,29 @@ try{
 				<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				  <path fill-rule="evenodd" d="M11.5 8h-7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-7-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7zm0-3a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
 				</svg>
-				<a>아이디</a>
+				<a >아이디</a>
 				<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-dot" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				  <path fill-rule="evenodd" d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
 				</svg>
-				<a>비밀번호</a>
+				<a>비밀번호 찾기</a>
 			</div>
           </div>
         </div>
+
+<%
+	}else{
+		
+	
+
+%>
+     <div id="profile" class="px-3 py-4 border text-center">
+     			<a href="LINC_MyPage.jsp" class="text-reset"><%=session.getAttribute("usernick") %></a>님 반갑습니다.
+     	<button class="btn btn-sm btn-secondary" type="button" onclick="location.href='LINC_Logout.jsp'" >로그아웃</button>
+     </div>
+     
+<%
+	}
+%>
         <div id="banner" class="my-3">
           <img src="https://via.placeholder.com/345x345.png">
         </div>

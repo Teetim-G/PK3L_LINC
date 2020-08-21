@@ -9,18 +9,6 @@
 
 	<%@ include file="BSLoad.jsp" %>
 	<%@include file="DBCONN.jsp"%>
-	<script>
-	function checkNick(){
-		if(document.chNickform.InputNick.value == ""){
-			alert("입력값을 확인해주세요!");
-			return;
-		}
-		
-		var url = "dupCheck_Nick.jsp?value=" + document.chNickform.InputNick.value;
-		
-		open(url, "닉네임 변경", "toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, width=300, height=200");
-	}
-	</script>
   </head>
  <%
 String sSQL = "select * from user_stat where s_ID='admin'";
@@ -66,28 +54,14 @@ try{
                 <label for="InputNick">닉네임</label>
                 <form class="form-group form-inline mb-2"method="post" name="chNickform" " >
                   <input type="text" class="form-control mx-sm-3 mb-2" id="InputNick" placeholder="<%=myNick%>">
-                  <button type="button" class="btn btn-primary mb-2 form-control"  data-toggle="modal" data-target="#exampleModal">변경</button>
+                  <button id="modifyNick"type="button" class="btn btn-primary mb-2 form-control"  >변경</button>
                 </form>
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLabel">닉네임 변경</h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div>
-				      <div class="modal-body">
-
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Save changes</button>
-				      </div>
-				    </div>
+                <div id="nickSucs" class="alert alert-primary d-none" role="alert">
+					  닉네임 변경에 성공했습니다!!
 				  </div>
-				</div>
+				  <div id="nickFail" class="alert alert-danger  d-none" role="alert">
+					  중복된 닉네임이 존재합니다!!
+				  </div>
                 
 				  
                 <label for="InputEmail">이메일</label>
@@ -389,6 +363,39 @@ try{
 		    }
 			alert("현재 비밀번호가 일치하지 않습니다!!");
 		});
+		$("#modifyNick").click(function(){ // 닉네임 변경 중복확인
+			var inputNick = $("#InputNick").val();
+			if(inputNick == ""){
+        		alert("변경값을 입력해주세요!")
+        		$('#nickSucs').addClass('d-none');
+		    	$('#nickFail').addClass('d-none');
+		    	return;
+        	}
+			$.ajax({
+		        type:"POST",
+		        url:"dupCheck_Nick.jsp",
+		        data : {Nick : inputNick},
+		        success: function(data){ // 성공시 data 0 반환, 중복된 닉네임 존재시 data 1 반환
+		        	data = $.trim(data);
+		        	if(data == "0"){
+
+			        	$('#nickSucs').removeClass('d-none');
+				    	$('#nickFail').addClass('d-none');
+		        		
+		        	}else if(data == "1"){
+		        		$('#nickSucs').addClass('d-none');
+				    	$('#nickFail').removeClass('d-none');
+		        	}
+		        },
+		        error: function(xhr, status, error) {
+		            alert(error);
+		        }  
+		    });
+
+		});
+
+	
+		
 
 	</script>
   </body>

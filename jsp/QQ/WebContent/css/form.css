@@ -1,0 +1,154 @@
+ <style>
+    #hbody {
+      margin: 0;
+      margin-top: 5px;
+   }
+   #left{
+      float:left;
+      width:100px;
+      height:1000px;
+   }
+   #right{
+   float:right;
+   width:100px;
+   height:1000px;
+   }
+   #hwrap {
+      width: 100%;
+      height: 150px;
+   }
+   #hmain{
+      margin:auto;
+      width: 1200px;
+      height: 100%;
+   }
+   #hmenu{
+      margin:auto;
+      width: 100%;
+      height:30px;
+      font-size:15px;
+      font-family:"HY±×·¡ÇÈ";
+      font-weight: bold;
+      text-align:center;
+      line-height: 30px
+   }
+   #htitle{
+      width: 300px;
+      float:left;
+      text-align: center;
+      padding-top:15px;
+   }
+   #htitlepoto{
+   }
+   #hright{
+      height: 100%;
+      overflow: auto;
+      
+   }
+   #hrighttop{
+      overflow: 900px;
+      height: 30%;
+      text-align:right;
+      font-size:12px;
+   }
+   #hrightbottom{
+      overflow: 900px;
+      height: 70%;
+   } 
+   a{text-decoration: none;color: black;}
+   
+   
+   #searchdiv{
+   margin-left:50px;
+   padding:1px;
+   height: 40px;
+   width: 500px;
+   border: 2px solid #1b5ac2;
+   background: #ffffff;
+   }
+   #searchdiv2{
+   margin-left:50px;
+   padding:1px;
+   height: 150px;
+   width: 600px;
+   margin:auto;
+  
+   }
+   #searchdiv3{
+   margin-left:70px;
+   padding:1px;
+   height: 50px;
+   width: 600px;
+   margin:auto;
+   border-bottom: 1px solid gold
+  
+   }
+   
+   #searchtext{
+   font-size: 16px;
+   width: 325px;
+   padding: 10px;
+   border: 0px;
+   outline: none;
+   float: left;
+   }
+     #serchtext2{
+   font-size: 15px;
+   width: 350px;
+   height: 35px;
+   border: 0px;
+   margin-left:30px;
+   outline: none;
+   float: center;
+   border: 2px solid #1b5ac2;
+   background: #ffffff;
+   
+   }
+   #serchtext3{
+   font-size: 15px;
+   width: 100px;
+   height: 35px;
+   margin-left:30px;
+   border: 0px;
+   outline: none;
+   float: left;
+    border: 2px solid #1b5ac2;
+   background: #ffffff;
+   
+   }
+    #serchtext4{
+   font-size: 15px;
+   
+   }
+   
+   
+   #searchbtn{
+   width: 50px;
+   height: 50px;
+   border: 0px;
+   background: #1b5ac2;
+   outline: none;
+   float: right;
+   color: #ffffff
+   }
+   #searchbtn2{
+   width: 50px;
+   height: 35px;
+   border: 0px;
+   background: #1b5ac2;
+   outline: none;
+   float: right;
+   margin-right:38px;
+   color: #ffffff
+   }
+ 
+   #searchbtn:hover{
+      background: #184a9b;
+      cursor: pointer;
+   }
+   .hrc{
+      border: 0px;
+      height: 1px;
+      background-color: #E6E6E6;
+   }
+   </style>

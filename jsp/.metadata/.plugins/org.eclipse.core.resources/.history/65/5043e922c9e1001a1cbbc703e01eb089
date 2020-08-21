@@ -1,0 +1,48 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width", initial-scale="1">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/add.css">
+<title>Insert title here</title>
+
+
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrp.js"></script>
+<%@ include file="header.jsp" %>
+
+
+
+<div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div style ="border-bottom: 2px solid blue; margin-bottom:50px; font-weight: bold ; font-size:50px;">음악 게시판
+</div>
+<p style = "font-weight: bold ; font-size:20px;">[음악]&nbsp;&nbsp;안녕하세요
+<div style ="border-bottom: 2px solid blue; margin-bottom:5
+0px">
+<span>2020.08.11 00:20</span><span>&nbsp;&nbsp;|&nbsp;&nbsp;용용</span>
+<span style ="float:right">&nbsp;&nbsp;|&nbsp;&nbsp;댓글&nbsp;&nbsp;2</span>
+<span style ="float:right">&nbsp;&nbsp;|&nbsp;&nbsp;추천&nbsp;&nbsp;1</span>
+<span style ="float:right">&nbsp;&nbsp;&nbsp;&nbsp;조회수&nbsp;&nbsp;20</span>
+
+</div>
+<div><textarea class="form-control" placeholder="글내용" id ="textAreaContent'  name="bbsContent" maxlength="2048" style="height:350px; width:1200px;"></textarea></div>
+</div>
+<div>
+
+
+
+
+
+</div>
+<%@ include file="form.jsp" %>
+
+</body>
+</html>

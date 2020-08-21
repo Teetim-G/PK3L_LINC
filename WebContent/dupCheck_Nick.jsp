@@ -6,6 +6,7 @@
 String sSQL = "select COUNT(*) from user_stat where s_NickName= ?";
 String uNick = request.getParameter("Nick");
 PreparedStatement pstmt=null;
+PreparedStatement pstmt2 = null;
 ResultSet rs = null;
 %>
 <%
@@ -17,6 +18,15 @@ try{
 		rs=pstmt.executeQuery();
 		rs.next();
 		String cnt = rs.getString("COUNT(*)");
+		cnt = cnt.trim();
+		System.out.print(uNick);
+		if(cnt.equals("0")){
+			String upSQL = "update user_stat set s_NickName = ? where s_ID = 'haha'";
+			pstmt2=conn.prepareStatement(upSQL);
+			pstmt2.setString(1, uNick);
+			pstmt2.executeUpdate();
+		}
+
 		out.print(cnt);
 	}catch(SQLException e){
 		out.print(e);
@@ -27,3 +37,4 @@ try{
 			conn.close();
 	}
 %>
+<%--session.getAttribute("userid") --%>

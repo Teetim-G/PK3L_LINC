@@ -52,10 +52,10 @@ try{
 
 
                 <label for="InputNick">닉네임</label>
-                <form class="form-group form-inline mb-2"method="post" name="chNickform" " >
+                <div class="form-group form-inline mb-2"method="post" name="chNickform" " >
                   <input type="text" class="form-control mx-sm-3 mb-2" id="InputNick" placeholder="<%=myNick%>">
                   <button id="modifyNick"type="button" class="btn btn-primary mb-2 form-control"  >변경</button>
-                </form>
+                </div>
                 <div id="nickSucs" class="alert alert-primary d-none" role="alert">
 					  닉네임 변경에 성공했습니다!!
 				  </div>

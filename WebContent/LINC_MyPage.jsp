@@ -27,7 +27,7 @@ try{
 		
 		
 %>
-   <body>
+   <body><!-- 바디 시작 -->
     <div id="wrap"class="container">
     	<%@ include file="header.jsp" %>
     	
@@ -39,7 +39,7 @@ try{
         
           <div class="tab-content" id="nav-tabContent">
           
-            <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+            <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list"><!-- 회원 정보 시작 -->
             
               <h5 class="pb-3">회원 정보</h5>
               <hr>
@@ -72,39 +72,85 @@ try{
 
               </div>
               
-            </div>
+            </div><!-- 회원 정보 끝 -->
             
             
-            <div class="tab-pane fade" id="list-chpwd" role="tabpanel" aria-labelledby="list-chpwd-list">
-              <form id="passform">
+            <div class="tab-pane fade" id="list-chpwd" role="tabpanel" aria-labelledby="list-chpwd-list"><!-- 비밀번호 변경 시작 -->
+            
+              <div id="passform">
+              
                 <h5 class="pb-3">비밀번호 변경</h5>
+                
                 <hr>
+                
                 <div class="float-left col-4 col-sm-3">
                   <label for="input_pwd" class="mr-2">비밀번호  설정</label>
                 </div>
+                
                 <div class="float-left form-group form-inline col-7">
-                  <input id="input_pwd" class="form-control mb-3"type="password" name="password" value=""><label for="input_pwd" class="ml-2 mb-3">현재 비밀번호 입력</label>
-                  <div id="wrpwd" class="alert alert-danger d-none" role="alert">
-					  현재 비밀번호가 일치하지 않습니다!
-				  </div>
-				  <div id="copwd" class="alert alert-primary d-none" role="alert">
-					  현재 비밀번호와 일치합니다!
-				  </div>
-                  <input id="input_chpwd" class="form-control mb-3"type="password" name="chpassword" value=""><label for="input_chpwd" class="ml-2 mb-3">변경할 비밀번호 입력</label>
+                	<input id="input_pwd" class="form-control mb-3"type="password" name="password" value=""><label for="input_pwd" class="ml-2 mb-3">현재 비밀번호 입력</label>
                   
-                  <input id="input_chpwdch" class="form-control mb-3"type="password" name="passwordch" value=""><label for="input_chpwdch" class="ml-2 mb-3">변경할 비밀번호 확인</label>
-                  <div id="wrChpwd" class="alert alert-danger d-none" role="alert">
-				  변경할 비밀번호가 일치하지 않습니다!
-				</div>
-				<div id="coChpwd" class="alert alert-primary d-none" role="alert">
-				  변경할 비밀번호와 일치합니다!
-				</div>
+                	<div id="wrpwd" class="alert alert-danger d-none" role="alert">
+					  현재 비밀번호가 일치하지 않습니다!
+					</div>
+				  
+					<div id="copwd" class="alert alert-primary d-none" role="alert">
+					  현재 비밀번호와 일치합니다!
+					</div>
+				  
+                  	<input id="input_chpwd" class="form-control mb-3"type="password" name="chpassword" value=""><label for="input_chpwd" class="ml-2 mb-3">변경할 비밀번호 입력</label>
+                  
+                  	<input id="input_chpwdch" class="form-control mb-3"type="password" name="passwordch" value=""><label for="input_chpwdch" class="ml-2 mb-3">변경할 비밀번호 확인</label>
+                 
+                	<div id="wrChpwd" class="alert alert-danger d-none" role="alert">
+				  		변경할 비밀번호가 일치하지 않습니다!
+					</div>
+					
+					<div id="coChpwd" class="alert alert-primary d-none" role="alert">
+					 	변경할 비밀번호와 일치합니다!
+					</div>
+				
                 </div>
-                <button id="pwdChange" type="button" name="btnChpwd"class="btn btn-xl btn-primary float-right" onclick="">비밀번호 변경</button>
-
-              </form>
-            </div>
-            <div class="tab-pane fade" id="list-post" role="tabpanel" aria-labelledby="list-post-list">
+                
+                <button id="pwdChange" type="button" name="btnChpwd"class="btn btn-xl btn-primary float-right" >비밀번호 변경</button>
+                
+                <div id="sucsModal" class="modal" tabindex="-1"> <!-- 변경 성공 알림 -->
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-body">
+				        <p>비밀번호 변경에 성공했습니다!!!</p>
+				      </div>
+				      <div class="modal-footer">
+				        <button id="pwdChanged"type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				
+				<div id="failModal"class="modal" tabindex="-1"> <!-- 변경 실패 알림 -->
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-body">
+				        <p>비밀번호 변경에 실패했습니다..</p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				
+				
+              </div>
+              
+              
+              
+            </div><!-- 비밀번호 변경 끝 -->
+            
+            
+            
+            
+            <div class="tab-pane fade" id="list-post" role="tabpanel" aria-labelledby="list-post-list"><!-- 작성글 관리 시작 -->
               <div class="">
                 <h5 class="pb-3">작성글 관리</h5>
                 <hr>
@@ -241,8 +287,9 @@ try{
                 </div>
               </div>
 
-            </div>
-            <div class="tab-pane fade" id="list-withdrawal" role="tabpanel" aria-labelledby="list-withdrawal-list">
+            </div><!-- 작성글 관리 끝 -->
+            
+            <div class="tab-pane fade" id="list-withdrawal" role="tabpanel" aria-labelledby="list-withdrawal-list"><!-- 회원 탈퇴 시작 -->
               <h5 class="pb-3">회원 탈퇴</h5>
               <hr>
               <form class="text-center">
@@ -258,10 +305,12 @@ try{
                 </div>
                 <button type="button" name="button"class="btn btn-danger">회원 탈퇴</button>
               </form>
-            </div>
+            </div><!-- 회원 관리 끝 -->
+            
           </div>
-        </div>
-        <div class="col-lg-3 p-5">
+        </div><!-- 왼쪽 콘텐츠 끝 -->
+        
+        <div class="col-lg-3 p-5"><!-- 선택 탭 시작 -->
           <div class="list-group" id="list-tab" role="tablist">
             <a class="list-group-item list-group-item-action active py-4" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">회원정보 관리</a>
             <a class="list-group-item list-group-item-action py-4" id="list-chpwd-list" data-toggle="list" href="#list-chpwd" role="tab" aria-controls="chpwd">비밀번호 변경</a>
@@ -269,14 +318,16 @@ try{
             <a class="list-group-item list-group-item-action py-4" id="list-withdrawal-list" data-toggle="list" href="#list-withdrawal" role="tab" aria-controls="withdrawal">회원 탈퇴</a>
           </div>
         </div>
-      </div>
+        
+      </div><!-- 콘텐츠 끝 -->
+      
     </div>
     
 	<%@ include file="footer.jsp" %>
 	<%@ include file="JsLoad.jsp" %>
 	
 	
-	<script>
+	<script>		// 자바스크립트
 		// 체크박스 전체선택 및 전체해제
 		$("#post_chk_all").click(function(){
 		    if($("#post_chk_all").is(":checked")){
@@ -340,7 +391,10 @@ try{
 		    }
 		});
 
-		$("#pwdChange").click(function(){
+		
+		$("#pwdChange").click(function(){// 비밀번호 변경 이벤트
+			
+			
 			var curPwd = $('#input_pwd').val();
 			var chPwd = $('#input_chpwd').val();
 			var chPwdch = $('#input_chpwdch').val();
@@ -348,12 +402,31 @@ try{
 			if(!curPwd || !chPwd || !chPwdch){
 				alert("입력값을 다시 확인해주세요!");
 				return;
+			}else if(curPwd == chPwd){
+				alert("현재 비밀번호와 변경할 비밀번호가 일치합니다!!");
+				return;
 			}
 			if(md5(curPwd) == realpwd) {
+				
 		    	if(chPwd == chPwdch){
-		    		$("#passform").attr("method", "POST");
-		    		$("#passform").attr("action", "");
-		    		$("#passform").submit();
+		    		$.ajax({
+				        type:"POST",
+				        url:"pwdModify.jsp",
+				        data : {newPwd : chPwd},
+				        success: function(data){ // 성공시 data 1 반환, 중복된 닉네임 존재시 data0 반환
+				        	data = $.trim(data)
+				        	if(data == "1"){
+				        		$('#sucsModal').modal('show')
+				        	}else if(data == "0"){
+				        		$('#failModal').modal('show')
+				        	}else{
+				        		alert(data);
+				        	}
+				        },
+				        error: function(xhr, status, error) {
+				            alert(error);
+				        }  
+				    });
 		    		return;
 		    	}else{
 		    		alert("변경할 비밀번호를 다시 확인해주세요!!");
@@ -363,6 +436,10 @@ try{
 		    }
 			alert("현재 비밀번호가 일치하지 않습니다!!");
 		});
+		$("#pwdChanged").click(function(){// 비밀번호 변경 완료시 부분 새로고침
+			location.reload();
+		});
+		
 		$("#modifyNick").click(function(){ // 닉네임 변경 중복확인
 			var inputNick = $("#InputNick").val();
 			if(inputNick == ""){
@@ -376,15 +453,16 @@ try{
 		        url:"dupCheck_Nick.jsp",
 		        data : {Nick : inputNick},
 		        success: function(data){ // 성공시 data 0 반환, 중복된 닉네임 존재시 data 1 반환
-		        	data = $.trim(data);
+					data = $.trim(data)
 		        	if(data == "0"){
-
 			        	$('#nickSucs').removeClass('d-none');
 				    	$('#nickFail').addClass('d-none');
 		        		
 		        	}else if(data == "1"){
 		        		$('#nickSucs').addClass('d-none');
 				    	$('#nickFail').removeClass('d-none');
+		        	}else{
+		        		alert(data);
 		        	}
 		        },
 		        error: function(xhr, status, error) {
@@ -398,7 +476,7 @@ try{
 		
 
 	</script>
-  </body>
+  </body><!-- 바디 끝 -->
   
 <%		
 	}catch(SQLException e){

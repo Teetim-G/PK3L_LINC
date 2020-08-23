@@ -23,11 +23,15 @@ try{
 		rs=pstmt.executeQuery();
 		rs.next();
 		String is_cri = rs.getString("s_AccStat");
+		String s_NickName = rs.getString("s_NickName");
 		if(is_cri.equals("미인증")){
 			out.println("<script>location.href='Access.jsp';</script>");
 		}
+		if(is_cri.equals("정지")){
+			out.println("<script>alert('현재 정지된 계정입니다');history.back();</script>");
+		}
 		session.setAttribute("userid", userid);
-		session.setAttribute("userpwd", userpwd);
+		session.setAttribute("usernick", s_NickName);
 		if(is_cri.equals("관리자")){
 			out.println("<script>location.href='LINC_AdminPgmain.jsp';</script>");
 		}

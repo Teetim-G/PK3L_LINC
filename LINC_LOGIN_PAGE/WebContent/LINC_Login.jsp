@@ -32,7 +32,7 @@
     </form>
     <div class="row">
         <a style="margin-left:50px;"href="LINC_Sign_Up.jsp">회원가입</a>
-        <a href="https://codeblush.com/category/wordpress">아이디/비밀번호 찾기</a>
+        <a href="LINC_Find.jsp">아이디/비밀번호 찾기</a>
     </div>
 </div>
 </body>

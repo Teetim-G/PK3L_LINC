@@ -293,19 +293,33 @@ try{
               <h5 class="pb-3">회원 탈퇴</h5>
               <hr>
               <form class="text-center">
-                <label for="curpwd">현재 비밀번호 입력</label>
+                <label for="input_curPwd_wd">현재 비밀번호 입력</label>
 
                 <div class="form-group form-inline">
-                  <input id="curpwd" class="form-control mx-auto"type="password" name="curpwd" value=""><br>
+                  <input id="input_curPwd_wd" class="form-control mx-auto"type="password" name="input_curPwd_wd" value=""><br>
                 </div>
-                  <label for="wd"class="text-danger">"회원 탈퇴"를 입력해 주세요.</label>
+                  <label for="input_wd"class="text-danger">"회원 탈퇴"를 입력해 주세요.</label>
 
                 <div class="form-group form-inline">
-                  <input id="wd" class="form-control mx-auto"type="text" name="curpwd" value=""><br>
+                  <input id="input_wd" class="form-control mx-auto"type="text" name="input_wd" value=""><br>
                 </div>
-                <button type="button" name="button"class="btn btn-danger">회원 탈퇴</button>
+                <button id="btn_wd" type="button" name="button"class="btn btn-danger">회원 탈퇴</button>
               </form>
-            </div><!-- 회원 관리 끝 -->
+              
+              <div id="wdModal" class="modal" tabindex="-1"> <!-- 변경 성공 알림 -->
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-body">
+				        <p>회원 탈퇴하면 되돌릴 수 없습니다. 정말로 진행하시겠습니까?</p>
+				      </div>
+				      <div class="modal-footer">
+				      	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				        <button id="wdOK"type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+            </div><!-- 회원 탈퇴 끝 -->
             
           </div>
         </div><!-- 왼쪽 콘텐츠 끝 -->
@@ -436,6 +450,43 @@ try{
 		    }
 			alert("현재 비밀번호가 일치하지 않습니다!!");
 		});
+		$("#btn_wd").click(function(){// 회원탈퇴 버튼 클릭
+			var curPwd = $('#input_curPwd_wd').val();
+			var realpwd = "<%=myPwd%>";
+			var wdCheck = $('#input_wd').val();
+			if(md5(curPwd) == realpwd && wdCheck == "회원 탈퇴" ){
+				$('#wdModal').modal('show')
+				return;
+			}else if(md5(curPwd) != realpwd){
+				alert("현재 비밀번호가 일치하지 않습니다!");
+				return;
+			}else if(wdCheck != "회원 탈퇴"){
+				alert("회원 탈퇴를 정확하게 입력해주세요!!");
+				return;
+			}
+		});
+		$("#wdOK").click(function(){// 회원탈퇴 확인
+			$.ajax({
+		        type:"POST",
+		        url:"Delete_User.jsp",
+		        data : {Nick : inputNick},
+		        success: function(data){ // 성공시 data 0 반환, 중복된 닉네임 존재시 data 1 반환
+					data = $.trim(data)
+		        	if(data == "0"){
+		        		
+		        	}else if(data == "1"){
+		        		
+		        	}else{
+		        		alert(data);
+		        	}
+		        },
+		        error: function(xhr, status, error) {
+		            alert(error);
+		        }  
+		    });
+			location.href = "LINC_Logout.jsp";
+		});
+		
 		$("#pwdChanged").click(function(){// 비밀번호 변경 완료시 부분 새로고침
 			location.reload();
 		});

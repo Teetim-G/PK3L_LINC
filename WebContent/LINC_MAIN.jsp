@@ -80,7 +80,7 @@ try{
 	}catch(SQLException e){
 		out.print(e);
 	}finally{
-		if(pstmt!=null)
+		if(pstmt != null)
 			pstmt.close();
 		if(conn!=null)
 			conn.close();

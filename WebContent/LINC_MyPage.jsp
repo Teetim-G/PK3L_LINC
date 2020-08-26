@@ -31,7 +31,7 @@ try{
     <div id="wrap"class="container">
     	<%@ include file="header.jsp" %>
     	
-      <h2 class="py-3">MY PAGE</h2>
+      <a href="LINC_MyPage.jsp" class="text-reset"><h2 class="py-3">MY PAGE</h2></a>
       
       <div id="content" class="row profile mb-5">
       

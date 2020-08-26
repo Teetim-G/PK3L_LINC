@@ -19,22 +19,22 @@
 <body id="page-top">
   <%@ include file="header.jsp" %>
   <div id="wrap" class="container p-3">
-    <div id="content" class="row p-1"> 
-      <div class="	row col-8" id="M_Left">
+    <div id="content" class="row py-1 px-3"> 
+      <div class="	row col-12 col-md-8" id="M_Left">
         <div class="M_Top_con w-100">
-        <h4>사진이 있는 컨텐츠</h4><hr>
+        <h5>사진이 있는 게시판</h5><hr>
           <div id="M_list_top ">
             <ul class="list_content position-relative overflow-hidden">
-              <li class="list_content_pic float-left mx-2"><a><img class="mb-2" src="https://via.placeholder.com/150x150.png" />
+              <li class="list_content_pic float-left mx-2 w-45"><a><img class="mb-2 img-thumbnail" src="https://via.placeholder.com/150x150.png" />
                   <p>안녕</p>
                 </a></li>
-              <li class="list_content_pic float-left mx-2"><a><img class="mb-2" src="https://via.placeholder.com/150x150.png" />
+              <li class="list_content_pic float-left mx-2 w-45"><a><img class="mb-2 img-thumbnail" src="https://via.placeholder.com/150x150.png" />
                   <p>하세요</p>
                 </a></li>
-              <li class="list_content_pic float-left mx-2 d-none d-lg-block"><a><img class="mb-2" src="https://via.placeholder.com/150x150.png" />
+              <li class="list_content_pic float-left mx-2 w-45 d-none d-lg-block"><a><img class="mb-2 img-thumbnail" src="https://via.placeholder.com/150x150.png" />
                   <p>제목</p>
                 </a></li>
-              <li class="list_content_pic float-left mx-2 d-none d-xl-block"><a><img class="mb-2" src="https://via.placeholder.com/150x150.png" />
+              <li class="list_content_pic float-left mx-2 w-45 d-none d-xl-block"><a><img class="mb-2 img-thumbnail" src="https://via.placeholder.com/150x150.png" />
                   <p>입니다.</p>
                 </a></li>
             </ul>
@@ -43,7 +43,7 @@
 
         <div class="M_con row">
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h4>자유</h4><hr>
+            <h5>자유</h5><hr>
             <ul class="list_content">
 <%
 String postSQL = "select s_Title, s_MkDate from post_state where Post_Category_n_PostNum = 0 order by s_MkDate;";
@@ -57,18 +57,18 @@ try{
 		while(rs.next()){
 			postTitle = rs.getString("s_Title");
 %>
-				<li><%=postTitle%></li>
+				<li class="text-truncate w-100 "><%=postTitle%></li>
 <%
 			cnt++;
-			if(cnt == 7){
+			if(cnt == 5){
 				break;
 			}
 			
 			
 		}
-		while(cnt<7){
+		while(cnt<5){
 %>
-			<li>요소<%=cnt+1%></li>
+			<li class="text-truncate">글제목.<%=cnt+1%></li>
 <%	
 		cnt++;
 		}
@@ -87,111 +87,93 @@ try{
 	}
 %>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h4>게시판 제목</h4><hr>
+            <h5>게시판 제목</h5><hr>
             <ul class="list_content">
               <li>요소 1</li>
               <li>요소 2</li>
               <li>요소 3</li>
               <li>요소 4</li>
               <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h4>게시판 제목</h4><hr>
+            <h5>게시판 제목</h5><hr>
             <ul class="list_content">
               <li>요소 1</li>
               <li>요소 2</li>
               <li>요소 3</li>
               <li>요소 4</li>
               <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h4>게시판 제목</h4><hr>
+            <h5>게시판 제목</h5><hr>
             <ul class="list_content">
               <li>요소 1</li>
               <li>요소 2</li>
               <li>요소 3</li>
               <li>요소 4</li>
               <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h4>게시판 제목</h4><hr>
+            <h5>게시판 제목</h5><hr>
             <ul class="list_content">
               <li>요소 1</li>
               <li>요소 2</li>
               <li>요소 3</li>
               <li>요소 4</li>
               <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h4>게시판 제목</h4><hr>
+            <h5>게시판 제목</h5><hr>
             <ul class="list_content">
               <li>요소 1</li>
               <li>요소 2</li>
               <li>요소 3</li>
               <li>요소 4</li>
               <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h4>게시판 제목</h4><hr>
+            <h5>게시판 제목</h5><hr>
             <ul class="list_content">
               <li>요소 1</li>
               <li>요소 2</li>
               <li>요소 3</li>
               <li>요소 4</li>
               <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h4>게시판 제목</h4><hr>
+            <h5>게시판 제목</h5><hr>
             <ul class="list_content">
               <li>요소 1</li>
               <li>요소 2</li>
               <li>요소 3</li>
               <li>요소 4</li>
               <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h4>게시판 제목</h4><hr>
+            <h5>게시판 제목</h5><hr>
             <ul class="list_content">
               <li>요소 1</li>
               <li>요소 2</li>
               <li>요소 3</li>
               <li>요소 4</li>
               <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h4>게시판 제목</h4><hr>
+            <h5>게시판 제목</h5><hr>
             <ul class="list_content">
               <li>요소 1</li>
               <li>요소 2</li>
               <li>요소 3</li>
               <li>요소 4</li>
               <li>요소 5</li>
-              <li>요소 6</li>
-              <li>요소 7</li>
             </ul>
           </div>
         </div>
@@ -203,7 +185,7 @@ try{
 <%
 	if(session.getAttribute("userid")==null){
 %>
-		<div id="account" class="px-3 py-4 border text-center">
+		<div id="account" class="px-3 py-4 border text-center align-middle">
           <button id="btn_login" type="button" class="btn btn-secondary btn-lg mb-2 w-100 " onclick="location.href='LINC_Login.jsp'"> 로그인 </button>
           <div class="font-weight-light float-none  "> 
           	
@@ -239,8 +221,8 @@ try{
 <%
 	}
 %>
-        <div id="banner" class="my-3">
-          <img src="https://via.placeholder.com/345x345.png">
+        <div id="banner" class="my-3 w-100">
+          <img src="https://via.placeholder.com/345x345.png" class="img-fluid" alt="Responsive image">
         </div>
         <div id="Rank">
           <div id="Rank_title">

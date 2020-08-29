@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="LINC_LOGIN_PAGE">
-        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/LINC_LOGIN_PAGE/build/classes"/>
-        <property name="context-root" value="LINC_LOGIN_PAGE"/>
-    </wb-module>
-</project-modules>

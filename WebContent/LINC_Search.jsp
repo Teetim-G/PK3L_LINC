@@ -21,7 +21,7 @@
                 <h4>14 개 의 검색 결과 . . .</h4>
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    정렬
+                    	정렬
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <h6 class="dropdown-header">정렬 </h6>

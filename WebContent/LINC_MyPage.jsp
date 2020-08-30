@@ -35,7 +35,7 @@ try{
       
       <div id="content" class="row profile mb-5">
       
-        <div class="col-lg-9 p-5 border">
+        <div class="col-lg-9 p-5 border" id="leftContent">
         
           <div class="tab-content" id="nav-tabContent">
           
@@ -157,17 +157,18 @@ try{
 
               </div><%-- sSQL = "select * from post_state where User_Stat_s_ID = " + session.getAttribute("userid") ; --%>
 <%
-				sSQL = "select * from forum where s_PostUser = 'admin'" ;
+				sSQL = "select * from forum where s_PostUser = 'admin' and is_Delete = 0" ;
                 pstmt=conn.prepareStatement(sSQL);
                 rs=pstmt.executeQuery();
                 String Title;
                 String Date;
                 int Board;
+                int PostNum;
                 int cntPost=0;
 %>
               <div class="list-group list-group-horizontal flex-fill" id="list-tab_post" role="tablist">
                 <a class="list-group-item list-group-item-action active py-2" id="list-mypost-list" data-toggle="list" href="#list-mypost" role="tab" aria-controls="mypost">게시글 관리</a>
-                <a class="list-group-item list-group-item-action py-2" id="list-mycomment-list" data-toggle="list" href="#list-mycomment" role="tab" aria-controls="mycomment">댓글 관리</a>
+                <a class="list-group-item list-group-item-action py-2" id="list-mycomment-list"  data-toggle="list" href="#list-mycomment" role="tab" aria-controls="mycomment">댓글 관리</a>
               </div>
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="list-mypost" role="tabpanel" aria-labelledby="list-mypost-list">
@@ -187,10 +188,11 @@ try{
                     	Title = rs.getString("s_Title");
                     	Date = rs.getString("s_WriteDay");
                     	Board = rs.getInt("n_ForumCategory");
+                    	PostNum = rs.getInt("n_PostOrder");
                     	cntPost++;
                     	%>
                     	<tr>
-                        <th scope="row"><input type="checkbox" class="pchk" name="pchk" id="pchk1"></th>
+                        <th scope="row"><input type="checkbox" class="pchk" name="pchk" value="<%=PostNum %>"></th>
                         <td>자유</td>
                         <td><%=Title %></td>
                         <td><%=Date %></td>
@@ -202,7 +204,7 @@ try{
                     </tbody>
                   </table>
                   <div class="">
-                    <button type="button" name="button"class="btn btn-outline-secondary float-left">
+                    <button type="button" name="button"class="btn btn-outline-secondary float-left"id="btn_dltPost">
                       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                         <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -263,7 +265,7 @@ try{
                   </table>
 
                   <div class="">
-                    <button type="button" name="button"class="btn btn-outline-secondary float-left">
+                    <button type="button" name="button"class="btn btn-outline-secondary float-left" id="btn_dltComt">
                       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                         <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -286,6 +288,19 @@ try{
                   </div>
                 </div>
               </div>
+              <div id="dltPostModal" class="modal" tabindex="-1"> <!-- 게시글 삭제 확인 -->
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-body">
+				        <p>선택한 항목을 삭제합니다. 진행하시겠습니까?</p>
+				      </div>
+				      <div class="modal-footer">
+				      	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				        <button id="dltPostOK"type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
 
             </div><!-- 작성글 관리 끝 -->
             
@@ -306,7 +321,7 @@ try{
                 <button id="btn_wd" type="button" name="button"class="btn btn-danger">회원 탈퇴</button>
               </form>
               
-              <div id="wdModal" class="modal" tabindex="-1"> <!-- 변경 성공 알림 -->
+              <div id="wdModal" class="modal" tabindex="-1"> <!-- 회원 탈퇴 알림 -->
 				  <div class="modal-dialog">
 				    <div class="modal-content">
 				      <div class="modal-body">
@@ -336,12 +351,14 @@ try{
       </div><!-- 콘텐츠 끝 -->
       
     </div>
+	
+	
+	
+  </body><!-- 바디 끝 -->
     
 	<%@ include file="footer.jsp" %>
 	<%@ include file="JsLoad.jsp" %>
-	
-	
-	<script>		// 자바스크립트
+  <script>		// 자바스크립트
 		// 체크박스 전체선택 및 전체해제
 		$("#post_chk_all").click(function(){
 		    if($("#post_chk_all").is(":checked")){
@@ -455,7 +472,7 @@ try{
 			var realpwd = "<%=myPwd%>";
 			var wdCheck = $('#input_wd').val();
 			if(md5(curPwd) == realpwd && wdCheck == "회원 탈퇴" ){
-				$('#wdModal').modal('show')
+				$('#wdModal').modal('show');
 				return;
 			}else if(md5(curPwd) != realpwd){
 				alert("현재 비밀번호가 일치하지 않습니다!");
@@ -465,15 +482,42 @@ try{
 				return;
 			}
 		});
+		$("#btn_dltPost").click(function(){// 게시글 삭제 버튼 클릭
+			$('#dltPostModal').modal('show');
+		});
+		$("#dltPostOK").click(function(){// 게시글 삭제 확인 버튼 클릭
+			var values = document.getElementsByName("pchk");
+			var checkRows = $("[name='pchk']:checked");
+			
+
+			for(var i=0;i<values.length;i++){
+				if(values[i].checked){
+					$.ajax({
+				        type:"POST",
+				        url:"Delete_Post.jsp",
+				        data : {Num : values[i].value},
+				        success: function(data){
+				        	for(var i=checkRows.length-1;i>-1;i--){
+				        		checkRows.eq(i).closest('tr').remove();
+				        	}
+				        },
+				        error: function(xhr, status, error) {
+				            alert(error);
+				        }  
+				    });
+				}
+			}
+			
+		
+		});
 		$("#wdOK").click(function(){// 회원탈퇴 확인
 			$.ajax({
 		        type:"POST",
 		        url:"Delete_User.jsp",
-		        data : {Nick : inputNick},
 		        success: function(data){ // 성공시 data 0 반환, 중복된 닉네임 존재시 data 1 반환
 					data = $.trim(data)
 		        	if(data == "0"){
-		        		
+		        		alert("삭제되었습니다!");
 		        	}else if(data == "1"){
 		        		
 		        	}else{
@@ -527,8 +571,6 @@ try{
 		
 
 	</script>
-  </body><!-- 바디 끝 -->
-  
 <%		
 	}catch(SQLException e){
 		out.print(e);

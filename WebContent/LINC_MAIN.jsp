@@ -45,8 +45,9 @@
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
             <h5>자유</h5><hr>
             <ul class="list_content">
+<%--where n_ForumCategory = 0 order by s_WriteDay --%> 
 <%
-String postSQL = "select s_Title, s_MkDate from post_state where Post_Category_n_PostNum = 0 order by s_MkDate;";
+String postSQL = "select s_Title, s_WriteDay from forum ;";
 PreparedStatement pstmt=null;
 ResultSet rs = null;
 try{

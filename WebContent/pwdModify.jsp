@@ -3,7 +3,7 @@
 <%@include file="DBCONN.jsp"%>
 
 <%
-String sSQL = "update user_stat set s_Pwd = md5(?) where s_ID = ?";
+String sSQL = "update user_stat set s_Password = md5(?) where s_ID = ?";
 String uID = (String)session.getAttribute("userid");
 String uPwd = request.getParameter("newPwd");
 PreparedStatement pstmt=null;

@@ -3,7 +3,7 @@
 <%@include file="DBCONN.jsp"%>
 
 <%
-String sSQL = "update user_stat set ? where s_ID = ?";
+String sSQL = "update user_stat set s_AccStat = '탈퇴' where s_ID = ?";
 String uID = (String)session.getAttribute("userid");
 PreparedStatement pstmt=null;
 String result = null;

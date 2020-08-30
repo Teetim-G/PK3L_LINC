@@ -22,7 +22,7 @@ try{
 		rs.next();
 		String myName = rs.getString("s_ID");
 		String myNick = rs.getString("s_NickName");
-		String myPwd = rs.getString("s_Pwd");
+		String myPwd = rs.getString("s_Password");
 		String myEmail = rs.getString("s_EMail");
 		
 		
@@ -157,7 +157,7 @@ try{
 
               </div><%-- sSQL = "select * from post_state where User_Stat_s_ID = " + session.getAttribute("userid") ; --%>
 <%
-				sSQL = "select * from post_state where User_Stat_s_ID = 'admin'" ;
+				sSQL = "select * from forum where s_PostUser = 'admin'" ;
                 pstmt=conn.prepareStatement(sSQL);
                 rs=pstmt.executeQuery();
                 String Title;
@@ -185,8 +185,8 @@ try{
                     <%
                     while(rs.next()){
                     	Title = rs.getString("s_Title");
-                    	Date = rs.getString("s_MkDate");
-                    	Board = rs.getInt("Post_Category_n_PostNum");
+                    	Date = rs.getString("s_WriteDay");
+                    	Board = rs.getInt("n_ForumCategory");
                     	cntPost++;
                     	%>
                     	<tr>
@@ -235,7 +235,7 @@ try{
                       </tr>
                     </thead>
                     <%
-                    sSQL = "select * from comment where s_CommentUser = 'admin'" ;
+                    sSQL = "select * from comment where s_CommentWriter = 'admin'" ;
                     pstmt=conn.prepareStatement(sSQL);
                     rs=pstmt.executeQuery();
                     String cmt;
@@ -245,8 +245,8 @@ try{
                     <%
                     while(rs.next()){
                     	cmt = rs.getString("s_Comment");
-                    	Date = rs.getString("s_Day");
-                    	Board = rs.getInt("Post_State_n_PostNum");
+                    	Date = rs.getString("s_WriteDay");
+                    	Board = rs.getInt("n_ForumNum");
                     	cntCmt++;
                     	%>
                     	<tr>

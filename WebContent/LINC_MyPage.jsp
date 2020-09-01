@@ -11,13 +11,19 @@
 	<%@include file="DBCONN.jsp"%>
   </head>
  <%
-String sSQL = "select * from user_stat where s_ID='admin'";
-PreparedStatement pstmt=null;
-ResultSet rs = null;
+ 
+	String uID = (String)session.getAttribute("userid"); 
+ 	if(uID == null){
+ 		response.sendRedirect("LINC_Login.jsp");
+ 	}
+	String sSQL = "select * from user_stat where s_ID= ?";
+	PreparedStatement pstmt=null;
+	ResultSet rs = null;
 %>
 <%
 try{
 		pstmt=conn.prepareStatement(sSQL);
+		pstmt.setString(1, uID);
 		rs=pstmt.executeQuery();
 		rs.next();
 		String myName = rs.getString("s_ID");
@@ -67,12 +73,44 @@ try{
                 <label for="InputEmail">이메일</label>
                 <div class="form-group form-inline mb-2">
                   <input type="email" class="form-control mx-sm-3 mb-2" id="InputEmail" placeholder="<%=myEmail%>">
-                  <button type="submit" class="btn btn-primary mb-2 form-control">이메일 재인증</button>
+                  <button id="btnEmailRecert" type="button" class="btn btn-primary mb-2 form-control" data-toggle="modal" data-target="#EmailRecertModal">이메일 재인증</button>
+                  
+                  <div class="modal fade" id="EmailRecertModal" tabindex="-1" aria-labelledby="EmailRecertModalLabel" aria-hidden="true">
+					   <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">이메일 재인증</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        <form>
+					          <div class="form-group">
+					            <label for="Input_Cert_Num" class="col-form-label mx-auto">인증번호 :</label>
+					            <input type="text" class="form-control mx-auto" id="Input_Cert_Num">
+					          </div>
+					        </form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+					        <button type="button" class="btn btn-primary" id="CertCheck">인증번호 확인</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+                  
                 </div>
-
+				
+				
+				
               </div>
               
+              
+              
+              
             </div><!-- 회원 정보 끝 -->
+            
             
             
             <div class="tab-pane fade" id="list-chpwd" role="tabpanel" aria-labelledby="list-chpwd-list"><!-- 비밀번호 변경 시작 -->
@@ -157,8 +195,9 @@ try{
 
               </div><%-- sSQL = "select * from post_state where User_Stat_s_ID = " + session.getAttribute("userid") ; --%>
 <%
-				sSQL = "select * from forum where s_PostUser = 'admin' and is_Delete = 0" ;
+				sSQL = "select * from forum where s_PostUser = ? and is_Delete = 0" ;
                 pstmt=conn.prepareStatement(sSQL);
+                pstmt.setString(1, uID);
                 rs=pstmt.executeQuery();
                 String Title;
                 String Date;
@@ -177,7 +216,7 @@ try{
                       <tr>
                       
                         <th scope="col"><input type="checkbox" class="pchk" id="post_chk_all"></th>
-                        <th scope="col">게시판</th>
+                        <th scope="col">게시판번호</th>
                         <th scope="col">제목</th>
                         <th scope="col">작성일</th>
                       </tr>
@@ -193,7 +232,7 @@ try{
                     	%>
                     	<tr>
                         <th scope="row"><input type="checkbox" class="pchk" name="pchk" value="<%=PostNum %>"></th>
-                        <td>자유</td>
+                        <td><%=Board %></td>
                         <td><%=Title %></td>
                         <td><%=Date %></td>
                       	</tr>
@@ -231,17 +270,18 @@ try{
                     <thead>
                       <tr>
                         <th scope="col"><input type="checkbox" class="cchk" id="comt_chk_all"></th>
-                        <th scope="col">게시판</th>
+                        <th scope="col">게시글번호</th>
                         <th scope="col">댓글내용</th>
                         <th scope="col">작성일</th>
                       </tr>
                     </thead>
                     <%
-                    sSQL = "select * from comment where s_CommentWriter = 'admin'" ;
+                    sSQL = "select * from comment where s_CommentWriter = ? and is_Delete = 0" ;
                     pstmt=conn.prepareStatement(sSQL);
+                    pstmt.setString(1, uID);
                     rs=pstmt.executeQuery();
                     String cmt;
-                    int cntCmt=0;
+                    int cntCmt=0, ComtNum;
                     %>
                     <tbody>
                     <%
@@ -249,10 +289,11 @@ try{
                     	cmt = rs.getString("s_Comment");
                     	Date = rs.getString("s_WriteDay");
                     	Board = rs.getInt("n_ForumNum");
+                    	ComtNum = rs.getInt("n_CommentOrder");
                     	cntCmt++;
                     	%>
                     	<tr>
-                        <th scope="row"><input type="checkbox" class="cchk" name="cchk" id="cchk1"></th>
+                        <th scope="row"><input type="checkbox" class="cchk" name="cchk" id="cchk1" value="<%=ComtNum %>"></th>
                         <td><%=Board %></td>
                         <td><%=cmt %></td>
                         <td><%=Date %></td>
@@ -297,6 +338,19 @@ try{
 				      <div class="modal-footer">
 				      	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 				        <button id="dltPostOK"type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<div id="dltComtModal" class="modal" tabindex="-1"> <!-- 댓글 삭제 확인 -->
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-body">
+				        <p>선택한 항목을 삭제합니다. 진행하시겠습니까?</p>
+				      </div>
+				      <div class="modal-footer">
+				      	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				        <button id="dltComtOK"type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
 				      </div>
 				    </div>
 				  </div>
@@ -359,7 +413,14 @@ try{
 	<%@ include file="footer.jsp" %>
 	<%@ include file="JsLoad.jsp" %>
   <script>		// 자바스크립트
+		
+  
+  		
+  
+  
 		// 체크박스 전체선택 및 전체해제
+		var CertNum;
+  		var uID = "<%=uID%>";
 		$("#post_chk_all").click(function(){
 		    if($("#post_chk_all").is(":checked")){
 		        $(".pchk").prop("checked", true);
@@ -442,9 +503,9 @@ try{
 		    	if(chPwd == chPwdch){
 		    		$.ajax({
 				        type:"POST",
-				        url:"pwdModify.jsp",
+				        url:"process/pwdModify.jsp",
 				        data : {newPwd : chPwd},
-				        success: function(data){ // 성공시 data 1 반환, 중복된 닉네임 존재시 data0 반환
+				        success: function(data){ // 
 				        	data = $.trim(data)
 				        	if(data == "1"){
 				        		$('#sucsModal').modal('show')
@@ -494,7 +555,35 @@ try{
 				if(values[i].checked){
 					$.ajax({
 				        type:"POST",
-				        url:"Delete_Post.jsp",
+				        url:"process/Delete_Post.jsp",
+				        data : {Num : values[i].value},
+				        success: function(data){
+				        	for(var i=checkRows.length-1;i>-1;i--){
+				        		checkRows.eq(i).closest('tr').remove();
+				        	}
+				        },
+				        error: function(xhr, status, error) {
+				            alert(error);
+				        }  
+				    });
+				}
+			}
+			
+		
+		});
+		$("#btn_dltComt").click(function(){// 댓글 삭제 버튼 클릭
+			$('#dltComtModal').modal('show');
+		});
+		$("#dltComtOK").click(function(){// 댓글 삭제 확인 버튼 클릭
+			var values = document.getElementsByName("cchk");
+			var checkRows = $("[name='cchk']:checked");
+			
+
+			for(var i=0;i<values.length;i++){
+				if(values[i].checked){
+					$.ajax({
+				        type:"POST",
+				        url:"process/Delete_Comt.jsp",
 				        data : {Num : values[i].value},
 				        success: function(data){
 				        	for(var i=checkRows.length-1;i>-1;i--){
@@ -513,7 +602,7 @@ try{
 		$("#wdOK").click(function(){// 회원탈퇴 확인
 			$.ajax({
 		        type:"POST",
-		        url:"Delete_User.jsp",
+		        url:"process/Delete_User.jsp",
 		        success: function(data){ // 성공시 data 0 반환, 중복된 닉네임 존재시 data 1 반환
 					data = $.trim(data)
 		        	if(data == "0"){
@@ -538,17 +627,17 @@ try{
 		$("#modifyNick").click(function(){ // 닉네임 변경 중복확인
 			var inputNick = $("#InputNick").val();
 			if(inputNick == ""){
-        		alert("변경값을 입력해주세요!")
+        		alert("변경값을 입력해주세요!");
         		$('#nickSucs').addClass('d-none');
 		    	$('#nickFail').addClass('d-none');
 		    	return;
         	}
 			$.ajax({
 		        type:"POST",
-		        url:"dupCheck_Nick.jsp",
+		        url:"process/dupCheck_Nick.jsp",
 		        data : {Nick : inputNick},
 		        success: function(data){ // 성공시 data 0 반환, 중복된 닉네임 존재시 data 1 반환
-					data = $.trim(data)
+					data = $.trim(data);
 		        	if(data == "0"){
 			        	$('#nickSucs').removeClass('d-none');
 				    	$('#nickFail').addClass('d-none');
@@ -566,8 +655,56 @@ try{
 		    });
 
 		});
+		$("#btnEmailRecert").click(function(){// 이메일 재인증
+			var NewEMail = $("#InputEmail").val();
+			$.ajax({
+		        type:"POST",
+		        url:"process/ReSendMail.jsp",
+		        data : {idial : uID,
+		        		to : NewEMail},
+		        success: function(Number){ // 
+		        	Number = $.trim(Number)
+		        	CertNum = Number;
 
-	
+		        },
+		        error: function(xhr, status, error) {
+		            alert(error);
+		        }  
+		    });
+		});
+		$("#CertCheck").click(function(){// 이메일 인증번호 확인
+			var NewEMail = $("#InputEmail").val();
+			var CertCheck = $("#Input_Cert_Num").val();
+			if(CertNum == CertCheck){
+				$.ajax({
+			        type:"POST",
+			        url:"process/AccessProcess.jsp",
+			        data : {cnumber : CertNum},
+			        success: function(Number){ // 
+			        	CertNum = null;
+			        	alert("이메일 재인증에 성공했습니다!!");
+			        	$.ajax({
+					        type:"POST",
+					        url:"process/Update_EMail.jsp",
+					        data : {idial : uID,
+					        		to : NewEMail},
+					        success: function(Number){ // 
+
+					        	$('#EmailRecertModal').modal('hide');
+
+					        },
+					        error: function(xhr, status, error) {
+					            alert(error);
+					        }  
+					    });
+						
+			        },
+			        error: function(xhr, status, error) {
+			            alert(error);
+			        }  
+			    });
+			}
+		});
 		
 
 	</script>

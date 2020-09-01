@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<!-- %@ include file="LINC_DBConnect.jsp" %-->
+	<%@ include file="LINC_DBConnect.jsp" %>
 
 	<%@ include file="header.jsp"%>
 
@@ -36,8 +36,6 @@
 					<li><a href="LINC_BlogManagement.jsp">블로그 관리</a></li>
 				</ul>
 			</div>
-
-			<a href="DBTest.jsp">DB테스트</a>
 
 		</div>
 

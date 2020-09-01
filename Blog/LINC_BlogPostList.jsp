@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +14,19 @@
 </head>
 <body>
 
-	<!-- %@ include file="LINC_DBConnect.jsp" %-->
+	<%@ include file="LINC_DBConnect.jsp" %>
 	<%@ include file="header.jsp"%>
 
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	
+	<script>
+
+		
+	
+		setTimeout(function(){window.location.reload();},100000);
+	
+	</script>
+	
 	<div style="height: 56px;"></div>
 
 	<div style="margin: auto; height: 1000px; width: 1200px;">
@@ -45,31 +57,65 @@
 						style="clear: both; width: 100%">
 						<thead>
 							<tr>
-								<th style="width: 10%;">글번호</th>
-								<th style="width: 70%;">제목</th>
-								<th style="width: 10%;">날짜</th>
-								<th style="width: 10%;">조회수</th>
+								<th style="width: 8%;">글번호</th>
+								<th style="width: 59%;">제목</th>
+								<th style="width: 17%;">날짜</th>
+								<th style="width: 8%;">추천수</th>
+								<th style="width: 8%;">조회수</th>
 							</tr>
 						</thead>
 						<tbody>
+
+							<%
+								ResultSet rs = null;
+								Statement stmt = null;
+								
+								int nCount = 0;
+								
+								try{
+									String sSQL = "SELECT * FROM post_state order by n_PostNum desc;";
+									//asc = 오름차순 || desc = 내림차순
+									stmt = conn.createStatement();
+									rs = stmt.executeQuery(sSQL);
+									
+									// out.println(sSQL + "<br>");
+									
+									while(rs.next()){//next는 DB기준 맨위부터 포인터가 훑고 previous를 사용하면 아래부터 훑는다.
+										String sPostNum = rs.getString("n_PostNum");
+										String sTitle = rs.getString("s_Title");
+										String sDate = rs.getString("s_MkDate");
+										// String sTag = rs.getString("s_Tag");
+										// String sCategory = rs.getString("s_Category");
+										String sCntView = rs.getString("n_CntView");
+										String sCntGood = rs.getString("n_CntGood");
+										
+										nCount = nCount + 1;
+							%>
+
 							<tr>
-								<td>1</td>
-								<td>첫번째 글</td>
-								<td>2020.08.00</td>
-								<td>0</td>
+								<td><%= sPostNum %></td>
+								<td><a href="LINC_BlogPostView.jsp?myID=<%=sPostNum%>"><%= sTitle %></a></td>
+								<td><%= sDate %></td>
+								<td><%= sCntView %></td>
+								<td><%= sCntGood %></td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>두번째 글</td>
-								<td>2020.08.00</td>
-								<td>0</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>세번째 글</td>
-								<td>2020.08.00</td>
-								<td>0</td>
-							</tr>
+
+							<% 
+									} 
+								}
+								catch(SQLException ex) {
+									out.println("에러 발생<br>");
+									out.println("SQLException : " + ex.getMessage());
+								} finally {
+									if(rs != null)
+										rs.close();
+									if(stmt != null)
+										stmt.close();
+									if(conn != null)
+										conn.close();
+								}
+							 
+							 %>
 						</tbody>
 					</table>
 					<div class="text-center">
@@ -107,6 +153,8 @@
 	<%@ include file="footer.jsp"%>
 
 	<%@ include file="JsLoad.jsp"%>
+
+
 
 </body>
 </html>

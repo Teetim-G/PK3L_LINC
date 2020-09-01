@@ -3,31 +3,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="BSLoad.jsp"%>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
 <link rel="stylesheet" href="css/base-layout.css">
+<%@ include file="BSLoad.jsp"%>
 
 <title>게시글 작성</title>
 
 </head>
 <body>
-	<!-- %@ include file="LINC_DBConnect.jsp" %-->
+	<%@ include file="LINC_DBConnect.jsp"%>
 
+	
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+
 	<script type="text/javascript">
    
+	
+	function postRegister(Post){ //게시글 등록
+		
+		pr_title = "작성완료"
+		var url = "LINC_BlogWriteReg.jsp";
+		window.open("LINC_BlogWriteReg.jsp","작성완료","width=400, height=300");
+		post.target = pr_title;
+		post.action = url;
+		post.method = "post";
+		post.submit();
+		
+		location.href='LINC_BlogPostList.jsp';
+		
+	}
    
 	function preview(Post){ //미리보기
 		
-		
-	var pv_title = "미리보기";	
-	var url = "LINC_BlogWritePreview.jsp"
-	window.open("LINC_BlogWritePreview.jsp","미리보기","width=850, height=600, location=no, status=no, scrollbars=yes");
-	post.target = pv_title;
-	post.action = url
-	post.method = "post";
-	post.submit();
+		var pv_title = "미리보기";	
+		var url = "LINC_BlogWritePreview.jsp";
+		window.open(url,"미리보기","width=850, height=600, location=no, status=no, scrollbars=yes");
+		post.target = pv_title;
+		post.action = url;
+		post.method = "post";
+		post.submit();
 	
 	}
    
@@ -208,6 +224,7 @@
 	            });
 	        }
 	    }
+
 	</script>
 
 
@@ -241,19 +258,19 @@
 
 			<div class="contents" style="width: 1000px;">
 
-				<form name="post" method="POST">
+				<form name="smartEditorText" method="POST"
+											action="/text/insertText">
 
 					<div id="conmain">
 						<table border="1" align="center" style="clear: both; width: 100%;">
 							<tbody>
 								<tr>
 									<td style="width: 50px;" align="center"><select
-										name="PostSubject">
-											<option value="subject" selected>분류</option>
-											<option value="talk">잡담</option>
-											<option value="game">게임</option>
-											<option value="music">음악</option>
-											<option value="video">영상</option>
+										name="PostCode">
+											<option value="선택" selected>선택</option>
+											<option value="1">게시판1</option>
+											<option value="2">게시판2</option>
+											<option value="3">게시판3</option>
 									</select></td>
 									<td width="50px" align="center"><a>제목</a></td>
 									<td style="width: 400px;"><input type="text"
@@ -261,18 +278,23 @@
 								</tr>
 
 								<tr>
-									<td colspan="2" width="100" align="center">태그</td>
+									<td width="50" align="center"><select name="PostSubject">
+											<option value="분류" selected>분류</option>
+											<option value="잡담">잡담</option>
+											<option value="게임">게임</option>
+											<option value="음악">음악</option>
+											<option value="영상">영상</option>
+									</select></td>
+									<td width="50" align="center">태그</td>
 									<td width="400"><input type="text" name="PostTag"
 										style="width: 100%;"></td>
 								</tr>
 
 								<tr>
-									<td colspan="3" align="center">스마트에디터 자리</td>
-								</tr>
-
-								<tr>
-									<th colspan="3"><input type="text" name="PostContents"
-										style="width: 100%; height: 500px;"></th>
+									<td colspan="3" align="center">
+											<textarea rows="13" cols="80" id="smartEditor"
+												name="smartEditor" style="width: 100%; height: 500px;"></textarea>
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -306,14 +328,16 @@
 							<button type="button" name="save">임시저장</button>
 							<button type="button" name="load">불러오기</button>
 							<button onclick="preview(post);" name="preview">미리보기</button>
-							<a href="#" onclick="uploadFile(); return false;"
-								class="btn bg_01">파일 업로드</a>
-							<!-- window.open('LINC_BlogWritePreview.jsp','미리보기','width=850, height=600, location=no, status=no, scrollbars=yes'); -->
+							<!-- a href="#" onclick="uploadFile(); return false;"
+								class="btn bg_01">파일 업로드</a -->
+							<button type="button" name="upload"
+								onclick="uploadFile(); return false;">파일 업로드</button>
 						</div>
 					</div>
 
 					<div style="float: right;">
-						<button type="button" name="register">등록</button>
+						<button type="submit" onclick="submitContents()">등록</button>
+						<!-- button onclick="postRegister(post);" name="register">등록</button -->
 					</div>
 				</form>
 
@@ -324,6 +348,35 @@
 	<%@ include file="footer.jsp"%>
 
 	<%@ include file="JsLoad.jsp"%>
+	
+	<!-- 스마트에디터 사용을 위한 코드, 파일 디렉터리 위치에 맞게 변경 -->
+	<script type="text/javascript" src="smarteditor2/js/HuskyEZCreator.js"
+		charset="utf-8"></script>
+
+
+	<script type="text/javascript">
+		var oEditors = [];
+
+		// Editor Setting
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : oEditors,
+			elPlaceHolder : "smartEditor", // 에디터를 적용할 textarea ID에 맞게 변경
+			sSkinURI : "smarteditor2/SmartEditor2Skin.html", // Editor HTML파일 위치로 변경
+			fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명으로 변경하면 안된다.
+			htParams : { // 툴바 사용 여부 (true/false)
+				bUseToolbar : true, // 입력창 크기 조절바 사용 여부 (true/false)
+				bUseVerticalResizer : true, // 모드 탭(Editor|HTML|TEXT) 사용 여부 (true/false)
+				bUseModeChanger : true
+			// 전송버튼 클릭이벤트
+			}
+		});
+
+		function submitContents() {
+			// 에디터의 내용이 textarea에 적용
+			oEditors.getById["class_tutorIntroduce"].exec(
+					"UPDATE_CONTENTS_FIELD", []);
+		}
+	</script>
 
 </body>
 </html>

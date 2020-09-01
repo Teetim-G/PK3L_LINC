@@ -14,8 +14,11 @@
 </head>
 <body>
 
-	<!-- %@ include file="LINC_DBConnect.jsp" %-->
+	<%@ include file="LINC_DBConnect.jsp"%>
+
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<%@ include file="header.jsp" %>
+	
 	
 	<div style="height:56px;">
 	</div>

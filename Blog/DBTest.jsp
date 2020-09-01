@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>DB테스트</title>
 <%@include file="LINC_DBConnect.jsp"%>
 </head>
 <body>

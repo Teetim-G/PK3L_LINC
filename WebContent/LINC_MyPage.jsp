@@ -195,7 +195,8 @@ try{
 
               </div><%-- sSQL = "select * from post_state where User_Stat_s_ID = " + session.getAttribute("userid") ; --%>
 <%
-				sSQL = "select * from forum where s_PostUser = ? and is_Delete = 0" ;
+				sSQL = "select * from forum where s_PostUser = ? and is_Delete = 0 " ;
+                
                 pstmt=conn.prepareStatement(sSQL);
                 pstmt.setString(1, uID);
                 rs=pstmt.executeQuery();
@@ -211,7 +212,7 @@ try{
               </div>
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="list-mypost" role="tabpanel" aria-labelledby="list-mypost-list">
-                  <table class="table table-hover">
+                  <table id="tblPost"class="table table-hover">
                     <thead>
                       <tr>
                       
@@ -231,7 +232,7 @@ try{
                     	cntPost++;
                     	%>
                     	<tr>
-                        <th scope="row"><input type="checkbox" class="pchk" name="pchk" value="<%=PostNum %>"></th>
+                        <td ><input type="checkbox" class="pchk" name="pchk" value="<%=PostNum %>"onclick="event.cancelBubble=true"></td>
                         <td><%=Board %></td>
                         <td><%=Title %></td>
                         <td><%=Date %></td>
@@ -240,6 +241,7 @@ try{
                     }
                     
                     %>
+                    <input id="cntPost" type="hidden" value=<%=cntPost %>>
                     </tbody>
                   </table>
                   <div class="">
@@ -250,23 +252,10 @@ try{
                       </svg>
                      	 삭제
                     </button>
-                    <nav aria-label="Page navigation example">
-                      <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">다음</a>
-                        </li>
-                      </ul>
-                    </nav>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="list-mycomment" role="tabpanel" aria-labelledby="list-mycomment-list">
-                  <table class="table table-hover ">
+                  <table id="tblComt" class="table table-hover ">
                     <thead>
                       <tr>
                         <th scope="col"><input type="checkbox" class="cchk" id="comt_chk_all"></th>
@@ -293,7 +282,7 @@ try{
                     	cntCmt++;
                     	%>
                     	<tr>
-                        <th scope="row"><input type="checkbox" class="cchk" name="cchk" id="cchk1" value="<%=ComtNum %>"></th>
+                        <td><input type="checkbox" class="cchk" name="cchk" id="cchk1" value="<%=ComtNum %>"onclick="event.cancelBubble=true"></th>
                         <td><%=Board %></td>
                         <td><%=cmt %></td>
                         <td><%=Date %></td>
@@ -302,7 +291,8 @@ try{
                     }
                     
                     %>
-                    </tbody>
+                    <input id="cntCmt" type="hidden" value=<%=cntCmt %>>
+					</tbody>
                   </table>
 
                   <div class="">
@@ -313,19 +303,6 @@ try{
                       </svg>
                     	  삭제
                     </button>
-                    <nav aria-label="Page navigation example">
-                      <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">다음</a>
-                        </li>
-                      </ul>
-                    </nav>
                   </div>
                 </div>
               </div>
@@ -412,7 +389,7 @@ try{
     
 	<%@ include file="footer.jsp" %>
 	<%@ include file="JsLoad.jsp" %>
-  <script>		// 자바스크립트
+  <script type="text/javascript">		// 자바스크립트
 		
   
   		
@@ -431,7 +408,7 @@ try{
 		});
 		// 한개의 체크박스 선택 해제시 전체선택 체크박스도 해제
 		$(".pchk").click(function(){
-		    if($("input[name='pchk']:checked").length == <%=cntPost%>){
+		    if($("input[name='pchk']:checked").length == $("#cntPost").val()){
 		        $("#post_chk_all").prop("checked", true);
 		    }else{
 		        $("#post_chk_all").prop("checked", false);
@@ -448,7 +425,7 @@ try{
 		});
 		// 한개의 체크박스 선택 해제시 전체선택 체크박스도 해제
 		$(".cchk").click(function(){
-		    if($("input[name='cchk']:checked").length == <%=cntCmt%>){
+		    if($("input[name='cchk']:checked").length == $("#cntCmt").val()){
 		        $("#comt_chk_all").prop("checked", true);
 		    }else{
 		        $("#comt_chk_all").prop("checked", false);
@@ -550,6 +527,7 @@ try{
 			var values = document.getElementsByName("pchk");
 			var checkRows = $("[name='pchk']:checked");
 			
+			
 
 			for(var i=0;i<values.length;i++){
 				if(values[i].checked){
@@ -560,7 +538,10 @@ try{
 				        success: function(data){
 				        	for(var i=checkRows.length-1;i>-1;i--){
 				        		checkRows.eq(i).closest('tr').remove();
+								
 				        	}
+				        	$("#cntPost").val($("#cntPost").val() - 1);
+				        	
 				        },
 				        error: function(xhr, status, error) {
 				            alert(error);
@@ -578,7 +559,7 @@ try{
 			var values = document.getElementsByName("cchk");
 			var checkRows = $("[name='cchk']:checked");
 			
-
+			
 			for(var i=0;i<values.length;i++){
 				if(values[i].checked){
 					$.ajax({
@@ -589,11 +570,14 @@ try{
 				        	for(var i=checkRows.length-1;i>-1;i--){
 				        		checkRows.eq(i).closest('tr').remove();
 				        	}
+
+			        		$("#cntCmt").val($("#cntCmt").val() - 1);
 				        },
 				        error: function(xhr, status, error) {
 				            alert(error);
 				        }  
 				    });
+					
 				}
 			}
 			
@@ -680,7 +664,7 @@ try{
 			        type:"POST",
 			        url:"process/AccessProcess.jsp",
 			        data : {cnumber : CertNum},
-			        success: function(Number){ // 
+			        success: function(Number){ 
 			        	CertNum = null;
 			        	alert("이메일 재인증에 성공했습니다!!");
 			        	$.ajax({
@@ -705,8 +689,53 @@ try{
 			    });
 			}
 		});
-		
+		$("#tblPost tr").click(function(){ // 테이블 행 클릭시 체크박스 선택
+			var checkbox =  $(this).find('input[type="checkbox"]');
+			
+			if(checkbox.is(':checked')){
+		        checkbox.prop('checked', false);
+		    }else{
+		    	checkbox.prop('checked', true);
+		    }
+			if($("input[name='pchk']:checked").length == $("#cntPost").val()){
+		        $("#post_chk_all").prop("checked", true);
+		    }else{
+		        $("#post_chk_all").prop("checked", false);
+		    }	
+		});
+		$("#tblComt tr").click(function(){ // 테이블 행 클릭시 체크박스 선택
+			var checkbox =  $(this).find('input[type="checkbox"]');
+			
+			if(checkbox.is(':checked')){
+		        checkbox.prop('checked', false);
+		    }else{
+		    	checkbox.prop('checked', true);
+		    }
+			if($("input[name='cchk']:checked").length == $("#cntCmt").val()){
+		        $("#comt_chk_all").prop("checked", true);
+		    }else{
+		        $("#comt_chk_all").prop("checked", false);
+		    }	
+		});
+		$('#list-tab a').click(function(e) {//새로고침시 탭 유지
+			  e.preventDefault();
+			  $(this).tab('show');
+			});
 
+			// store the currently selected tab in the hash value
+		$(".list-group > a").on("shown.bs.tab", function(e) {
+			  var id = $(e.target).attr("href").substr(1);
+			  window.location.hash = id;
+		});
+
+			// on load of the page: switch to the currently selected tab
+		var hash = window.location.hash;
+		$('#list-tab a[href="' + hash + '"]').tab('show');
+
+		
+		
+		
+		
 	</script>
 <%		
 	}catch(SQLException e){

@@ -20,7 +20,7 @@ try{
 		String res =rs.getString("s_AccStat")+'/'+rs.getString("s_EMail")+'/'+rs.getString("s_NickName");
 		String state = rs.getString("s_AccStat");
 		if(state.equals("인증")||state.equals("관리자")){
-			session.setAttribute("username", rs.getString("s_ID"));
+			session.setAttribute("userid", rs.getString("s_ID"));
 		}
 		out.println(res);
 %>

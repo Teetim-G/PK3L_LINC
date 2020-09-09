@@ -7,6 +7,8 @@
 <meta name="viewport" content="width=device-width" , initial-scale="1">
 <link rel="stylesheet" href="css/base-layout.css">
 <%@ include file="BSLoad.jsp"%>
+<script type="text/javascript" src="<%=request.getContextPath()%>/SE2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<!--  script type="text/javascript" src="<%=request.getContextPath()%>/SE2/photo_uploader/plugin/hp_M_AttachQuickPhoto.js" charset="utf-8"></script -->
 
 <title>게시글 작성</title>
 
@@ -14,14 +16,14 @@
 <body>
 	<%@ include file="LINC_DBConnect.jsp"%>
 
-	
+
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 
 
 	<script type="text/javascript">
    
 	
-	function postRegister(Post){ //게시글 등록
+	/* function postRegister(Post){ //게시글 등록
 		
 		pr_title = "작성완료"
 		var url = "LINC_BlogWriteReg.jsp";
@@ -31,9 +33,12 @@
 		post.method = "post";
 		post.submit();
 		
-		location.href='LINC_BlogPostList.jsp';
+		oEditors.getById["smartEditor"].exec(
+				"UPDATE_CONTENTS_FIELD", []);
 		
-	}
+		// location.href='LINC_BlogPostList.jsp';
+		
+	} */
    
 	function preview(Post){ //미리보기
 		
@@ -44,7 +49,7 @@
 		post.action = url;
 		post.method = "post";
 		post.submit();
-	
+		
 	}
    
 	//파일 업로드
@@ -117,7 +122,7 @@
 	                // 확장자
 	                var ext = fileNameArr[fileNameArr.length - 1];
 	                // 파일 사이즈(단위 :MB)
-	                var fileSize = files[i].size / 1024 / 1024;
+	                var fileSize = files[i].size/1024/1024;
 	                
 	                if($.inArray(ext, ['exe', 'bat', 'sh', 'java', 'jsp', 'html', 'js', 'css', 'xml']) >= 0){
 	                    // 확장자 체크
@@ -258,8 +263,7 @@
 
 			<div class="contents" style="width: 1000px;">
 
-				<form name="smartEditorText" method="POST"
-											action="/text/insertText">
+				<form name="post" method="POST" action="LINC_BlogWriteReg.jsp">
 
 					<div id="conmain">
 						<table border="1" align="center" style="clear: both; width: 100%;">
@@ -291,9 +295,54 @@
 								</tr>
 
 								<tr>
-									<td colspan="3" align="center">
-											<textarea rows="13" cols="80" id="smartEditor"
-												name="smartEditor" style="width: 100%; height: 500px;"></textarea>
+									<td colspan="3" align="center"><textarea rows="13"
+											cols="80" id="smartEditor" name="PostContents"
+											style="width: 100%; height: 500px;"></textarea>
+										
+										<!-- 스마트에디터 사용을 위한 코드, 파일 디렉터리 위치에 맞게 변경 -->
+										<script type="text/javascript">
+											var oEditors = [];
+									
+											// Editor Setting
+											nhn.husky.EZCreator.createInIFrame({
+												oAppRef : oEditors,
+												elPlaceHolder : "smartEditor", // 에디터를 적용할 textarea ID에 맞게 변경
+												
+												// Editor HTML파일 위치로 변경
+												sSkinURI : "<%=request.getContextPath()%>/SE2/SmartEditor2Skin.html",
+												fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명으로 변경하면 안된다.
+												htParams : { // 툴바 사용 여부 (true/false)
+													bUseToolbar : true, // 입력창 크기 조절바 사용 여부 (true/false)
+													bUseVerticalResizer : true, // 모드 탭(Editor|HTML|TEXT) 사용 여부 (true/false)
+													bUseModeChanger : true
+												// 전송버튼 클릭이벤트
+												}
+											});
+									
+											function submitContents(POST) {
+												
+												// 에디터의 내용이 textarea에 적용
+												oEditors.getById["smartEditor"].exec(
+														"UPDATE_CONTENTS_FIELD", []);
+									
+													pr_title = "작성완료"
+													var url = "LINC_BlogWriteReg.jsp";
+													window.open("LINC_BlogWriteReg.jsp","작성완료","width=400, height=300");
+													post.target = pr_title;
+													post.action = url;
+													post.method = "post";
+													post.submit();
+													
+													location.href="LINC_BlogPostList.jsp";
+												
+											}
+											
+											// textArea에 이미지 첨부
+											function pasteHTML(filepath){
+											    var sHTML = '<img src="<%=request.getContextPath()%>/smarteditor2/upload/'+filepath+'">';
+											    oEditors.getById["smartEditor"].exec("PASTE_HTML", [sHTML]);
+											}
+										</script>
 									</td>
 								</tr>
 							</tbody>
@@ -336,8 +385,8 @@
 					</div>
 
 					<div style="float: right;">
-						<button type="submit" onclick="submitContents()">등록</button>
-						<!-- button onclick="postRegister(post);" name="register">등록</button -->
+						<button type="button" onclick="submitContents(post)" name="register">등록</button>
+						<!--  button type="button" onclick="postRegister(post);" name="register">등록2</button -->
 					</div>
 				</form>
 
@@ -348,35 +397,6 @@
 	<%@ include file="footer.jsp"%>
 
 	<%@ include file="JsLoad.jsp"%>
-	
-	<!-- 스마트에디터 사용을 위한 코드, 파일 디렉터리 위치에 맞게 변경 -->
-	<script type="text/javascript" src="smarteditor2/js/HuskyEZCreator.js"
-		charset="utf-8"></script>
-
-
-	<script type="text/javascript">
-		var oEditors = [];
-
-		// Editor Setting
-		nhn.husky.EZCreator.createInIFrame({
-			oAppRef : oEditors,
-			elPlaceHolder : "smartEditor", // 에디터를 적용할 textarea ID에 맞게 변경
-			sSkinURI : "smarteditor2/SmartEditor2Skin.html", // Editor HTML파일 위치로 변경
-			fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명으로 변경하면 안된다.
-			htParams : { // 툴바 사용 여부 (true/false)
-				bUseToolbar : true, // 입력창 크기 조절바 사용 여부 (true/false)
-				bUseVerticalResizer : true, // 모드 탭(Editor|HTML|TEXT) 사용 여부 (true/false)
-				bUseModeChanger : true
-			// 전송버튼 클릭이벤트
-			}
-		});
-
-		function submitContents() {
-			// 에디터의 내용이 textarea에 적용
-			oEditors.getById["class_tutorIntroduce"].exec(
-					"UPDATE_CONTENTS_FIELD", []);
-		}
-	</script>
 
 </body>
 </html>

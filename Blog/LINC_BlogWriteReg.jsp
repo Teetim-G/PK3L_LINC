@@ -15,25 +15,24 @@
 		String sCategory = request.getParameter("PostSubject");
 		String sTitle = request.getParameter("PostTitle");
 		String sTag = request.getParameter("PostTag");
-		String sPostContent = request.getParameter("PostContents");
+		String sContent = request.getParameter("PostContents");
 		String sUserID = request.getParameter("postRegister");
 	%>
 	
 	<%
-		// Select * from post_state where Uaer_stat_s_ID = 'admin'	
 	
 	
 		Statement stmt = null;
 		try{
 			stmt = conn.createStatement();
-			//String sSQL = "insert forum" +
-			//			  "(n_PostNum,s_MkDate,n_PostCode,s_Title,s_PostContent,s_Tag,s_Category,User_Stat_s_ID,Post_Category_n_PostNum)" +
-			//			  "values" +
-			//			  "(4,now(),'"+sPostCode+"','"+sTitle+"','"+sPostContent+"','"+sTag+"','"+sCategory+"','admin',4)";
-			String sSQL = "insert forum" +
-					  "(s_MkDate,s_Title,s_PostContent,s_Tag,s_Category,User_Stat_s_ID)" +
+			/* String sSQL = "insert into linc_c.forum" +
+					  "(s_WriteDay,s_Title,s_Content,n_ForumCategory,s_PostUser)" +
 					  "values" +
-					  "(now(),'"+sTitle+"','"+sPostContent+"','"+sTag+"','"+sCategory+"','admin')";
+					  "(now(),'"+sTitle+"','"+sContent+"','"+sCategory+"','Dong')"; */
+			String sSQL = "insert into linc_c.forum" +
+					  "(s_WriteDay,s_Title,s_Content,s_PostUser)" +
+					  "values" +
+					  "(now(),'"+sTitle+"','"+sContent+"','Finale')";
 			out.println(sSQL + "<br>");
 			
 			stmt.executeUpdate(sSQL);//쿼리문을 실행하는 코드

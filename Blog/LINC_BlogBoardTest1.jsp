@@ -80,32 +80,32 @@
 						int nCount = 0;
 						
 						try{
-							String sSQL = "SELECT * FROM post_state where n_PostCode='1' order by n_PostNum desc;";
+							String sSQL = "SELECT * FROM linc_c.forum where n_ForumCategory='0'&&is_delete='0' order by n_PostOrder desc;";
 							//asc = 오름차순 || desc = 내림차순
 							stmt = conn.createStatement();
 							rs = stmt.executeQuery(sSQL);
 						
 							while(rs.next()){
 								
-								int PostCode = rs.getInt("n_PostCode");
-								String sPostNum = rs.getString("n_PostNum");
+								int nForumCategory = rs.getInt("n_ForumCategory");
+								String sPostOrder = rs.getString("n_PostOrder");
 								String sTitle = rs.getString("s_Title");
-								String sDate = rs.getString("s_MkDate");
+								String sWriteDay = rs.getString("s_WriteDay");
 								// String sTag = rs.getString("s_Tag");
 								// String sCategory = rs.getString("s_Category");
-								String sCntView = rs.getString("n_CntView");
-								String sCntGood = rs.getString("n_CntGood");
-
+								String sView = rs.getString("n_ViewCount");
+								String sGood = rs.getString("n_GoodCount");
+								// String sBad = rs.getString("n_BadCount");
 								
-								if(PostCode == 1){
+								if(nForumCategory == 0){
 								
 					%>
 					<tr>
-						<td><%= sPostNum %></td>
-						<td><a href="LINC_BlogPostView.jsp?myID=<%=sPostNum%>"><%= sTitle %></a></td>
-						<td><%= sDate %></td>
-						<td><%= sCntView %></td>
-						<td><%= sCntGood %></td>
+						<td><%= sPostOrder %></td>
+						<td><a href="LINC_BlogPostView.jsp?myID=<%=sPostOrder%>"><%= sTitle %></a></td>
+						<td><%= sWriteDay %></td>
+						<td><%= sView %></td>
+						<td><%= sGood %></td>
 					</tr>
 					
 					<%

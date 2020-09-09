@@ -8,7 +8,7 @@
 </head>
 <body>
 	<!--  %@ include file="LINC_DBConnect.jsp" % -->
-	<script>
+	<script type="text/javascript">
 		function pvClose() {
 			self.close();
 		}
@@ -22,7 +22,7 @@
 			<tbody>
 				<tr>
 					<td style="width: 50px;" align="center">
-						<%=request.getParameter("PostSubject")%>
+						<%=request.getParameter("PostCode")%>
 					</td>
 					<td width="50px" align="center"><a>제목</a></td>
 					<td style="width: 400px;">
@@ -31,7 +31,10 @@
 				</tr>
 
 				<tr>
-					<td colspan="2" width="100" align="center">태그</td>
+					<td style="width: 50px;" align="center">
+						<%=request.getParameter("PostSubject")%>
+					</td>
+					<td width="50" align="center">태그</td>
 					<td width="400">
 						<%=request.getParameter("PostTag")%>
 					</td>

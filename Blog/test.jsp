@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="java.io.File"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,6 +48,9 @@
 					"UPDATE_CONTENTS_FIELD", []);
 		}
 	</script>
+	
+	sSkinURI : "<%=request.getContextPath()%>" <br>
+	String path = <%=request.getSession().getServletContext().getRealPath("/") + File.separator%> + "C:/Java/Workspace/CapStoneWeb/WebContent/uploadFolder";
 
 </body>
 </html>

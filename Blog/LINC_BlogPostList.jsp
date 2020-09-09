@@ -73,7 +73,7 @@
 								int nCount = 0;
 								
 								try{
-									String sSQL = "SELECT * FROM post_state order by n_PostNum desc;";
+									String sSQL = "SELECT * FROM linc_c.forum where is_delete='0' order by n_PostOrder desc;";
 									//asc = 오름차순 || desc = 내림차순
 									stmt = conn.createStatement();
 									rs = stmt.executeQuery(sSQL);
@@ -81,23 +81,24 @@
 									// out.println(sSQL + "<br>");
 									
 									while(rs.next()){//next는 DB기준 맨위부터 포인터가 훑고 previous를 사용하면 아래부터 훑는다.
-										String sPostNum = rs.getString("n_PostNum");
+										String sPostOrder = rs.getString("n_PostOrder");
 										String sTitle = rs.getString("s_Title");
-										String sDate = rs.getString("s_MkDate");
+										String sDate = rs.getString("s_WriteDay");
 										// String sTag = rs.getString("s_Tag");
 										// String sCategory = rs.getString("s_Category");
-										String sCntView = rs.getString("n_CntView");
-										String sCntGood = rs.getString("n_CntGood");
+										String sView = rs.getString("n_ViewCount");
+										String sGood = rs.getString("n_GoodCount");
+										// String sBad = rs.getString("n_BadCount");
 										
 										nCount = nCount + 1;
 							%>
 
 							<tr>
-								<td><%= sPostNum %></td>
-								<td><a href="LINC_BlogPostView.jsp?myID=<%=sPostNum%>"><%= sTitle %></a></td>
+								<td><%= sPostOrder %></td>
+								<td><a href="LINC_BlogPostView.jsp?myID=<%=sPostOrder%>"><%= sTitle %></a></td>
 								<td><%= sDate %></td>
-								<td><%= sCntView %></td>
-								<td><%= sCntGood %></td>
+								<td><%= sView %></td>
+								<td><%= sGood %></td>
 							</tr>
 
 							<% 

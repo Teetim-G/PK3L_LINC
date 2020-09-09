@@ -334,7 +334,9 @@
     	var tempFile,
     		sUploadURL;
     	
-    	sUploadURL= '/multi.jsp'; 	//upload URL
+    	// sUploadURL= '/multi.jsp'; 	//upload URL
+		// sUploadURL= 'http://61.84.24.210:8080/LINC_C/img/'; 	//upload URL
+		sUploadURL= '/CapStoneWeb/file_uploader_html5.jsp'; 	//upload URL
     	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
@@ -457,8 +459,8 @@
 	 * Ajax 통신 시 error가 발생할 때 처리하는 함수입니다.
 	 * @return
 	 */
-	function onAjaxError (){
-		alert("[가이드]사진 업로더할 서버URL셋팅이 필요합니다.-onAjaxError");
+	function onAjaxError (e){
+		alert("[가이드]사진 업로더할 서버URL셋팅이 필요합니다.-onAjaxError"+e._response.responseText);
 	}
 
  	/**
@@ -478,8 +480,12 @@
  	 */
  	function callFileUploader (){
  		oFileUploader = new jindo.FileUploader(jindo.$("uploadInputBox"),{
- 			sUrl  : location.href.replace(/\/[^\/]*$/, '') + '/file_uploader.php',	//샘플 URL입니다.
- 	        sCallback : location.href.replace(/\/[^\/]*$/, '') + '/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
+ 			// sUrl  : location.href.replace(/\/[^\/]*$/, '') + '/file_uploader.php',	//샘플 URL입니다.
+ 	        // sCallback : location.href.replace(/\/[^\/]*$/, '') + '/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
+			// sUrl  : '61.84.24.210:8080/LINC_C/img/',
+			sUrl  : '/smarteditor2/sample/photo_uploader/file_uploader.jsp',
+ 	        sCallback : '/smarteditor2/sample/photo_uploader/callback.html',
+			
  	    	sFiletype : "*.jpg;*.png;*.bmp;*.gif",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)	
  	    	sMsgNotAllowedExt : 'JPG, GIF, PNG, BMP 확장자만 가능합니다',	//허용할 파일의 형식이 아닌경우에 띄워주는 경고창의 문구
  	    	bAutoUpload : false,									 	//파일이 선택됨과 동시에 자동으로 업로드를 수행할지 여부 (upload 메소드 수행)

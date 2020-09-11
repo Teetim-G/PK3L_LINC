@@ -186,7 +186,7 @@ try{
 <%
 	if(session.getAttribute("userid")==null){
 %>
-		<div id="account" class="px-3 py-4 border text-center align-middle">
+		<div id="account" class="px-3 py-4 border text-center align-middle overflow-hidden">
           <button id="btn_login" type="button" class="btn btn-secondary btn-lg mb-2 w-100 " onclick="location.href='LINC_Login.jsp'"> 로그인 </button>
           <div class="font-weight-light float-none  "> 
           	

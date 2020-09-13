@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/LINC_Sign_Up.css">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>회원가입</title>
 </head>
 <body>
 <%@ page import="java.util.*"%>

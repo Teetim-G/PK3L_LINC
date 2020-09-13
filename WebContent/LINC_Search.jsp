@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="linc.ForumDTO"%>
 <%@page import="linc.CategoryDTO"%>
 <%@page import="linc.UserDTO"%>
+<%@page import="linc.ForumDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="linc.LincDAO"%>
 <!doctype html>

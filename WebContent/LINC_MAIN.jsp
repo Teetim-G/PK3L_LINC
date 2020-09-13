@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="linc.ForumDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="linc.LincDAO"%>
 <!doctype html>
 <html lang="kr">
 
@@ -11,6 +14,10 @@
 
   <%@ include file="BSLoad.jsp" %>
   <%@include file="DBCONN.jsp"%>
+  
+  <%LincDAO lincDAO = new LincDAO();
+int rsCount = 0;
+int pLimit;%>
 </head>
 
 
@@ -20,7 +27,8 @@
   <%@ include file="header.jsp" %>
   <div id="wrap" class="container p-3">
     <div id="content" class="row py-1 px-3"> 
-      <div class="	row col-12 col-md-8" id="M_Left">
+      <div class="row col-12 col-md-8" id="M_Left">
+      
         <div class="M_Top_con w-100">
         <h5>사진이 있는 게시판</h5><hr>
           <div id="M_list_top ">
@@ -43,146 +51,308 @@
 
         <div class="M_con row">
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h5>자유</h5><hr>
+          <%
+	          ArrayList<ForumDTO> Dtos = lincDAO.forumSelectAtCat(0);
+          	  String cat = lincDAO.catCheck(0);
+				if(Dtos.size() < 5){
+	          	pLimit = Dtos.size();
+	          }else{
+	          	pLimit = 5;
+	          }
+          %>
+            <h5><%=cat %></h5><hr>
             <ul class="list_content">
-<%-- --%> 
-<%
-String postSQL = "select s_Title, s_WriteDay from forum where n_ForumCategory = 0 order by s_WriteDay;";
-PreparedStatement pstmt=null;
-ResultSet rs = null;
-try{
-		pstmt=conn.prepareStatement(postSQL);
-		rs=pstmt.executeQuery();
-		String postTitle = null;
-		int cnt = 0;
-		while(rs.next()){
-			postTitle = rs.getString("s_Title");
-%>
-				<li class="text-truncate w-100 "><%=postTitle%></li>
-<%
-			cnt++;
-			if(cnt == 5){
-				break;
+			<%
+			
+			for(int i=0; i<pLimit; i++) {
+            	ForumDTO Dto = Dtos.get(i);
+                String title = Dto.getfTitle();
+                
+                
+                %>
+                <li class="text-truncate w-100" >
+                    <%=title %>
+                </li>
+                
+                <%
+            }
+			for(int i=Dtos.size(); i<5; i++){
+				%>
+                <li class="text-truncate w-100" >
+                   	표시할 내용이 없습니다.
+                </li>
+                
+                <%
 			}
+			%>
+            </ul>
+          </div>
+          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
+          <%
+	          Dtos = lincDAO.forumSelectAtCat(1);
+          	  cat = lincDAO.catCheck(1);
+				if(Dtos.size() < 5){
+	          	pLimit = Dtos.size();
+	          }else{
+	          	pLimit = 5;
+	          }
+          %>
+            <h5><%=cat %></h5><hr>
+            <ul class="list_content">
+			<%
 			
+			for(int i=0; i<pLimit; i++) {
+            	ForumDTO Dto = Dtos.get(i);
+                String title = Dto.getfTitle();
+                
+                
+                %>
+                <li class="text-truncate w-100" >
+                    <%=title %>
+                </li>
+                
+                <%
+            }
+			for(int i=Dtos.size(); i<5; i++){
+				%>
+                <li class="text-truncate w-100" >
+                   	표시할 내용이 없습니다.
+                </li>
+                
+                <%
+			}
+			%>
+            </ul>
+          </div>
+          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
+          <%
+	          Dtos = lincDAO.forumSelectAtCat(2);
+          	  cat = lincDAO.catCheck(2);
+				if(Dtos.size() < 5){
+	          	pLimit = Dtos.size();
+	          }else{
+	          	pLimit = 5;
+	          }
+          %>
+            <h5><%=cat %></h5><hr>
+            <ul class="list_content">
+			<%
 			
-		}
-		while(cnt<5){
-%>
-			<li class="text-truncate">글제목.<%=cnt+1%></li>
-<%	
-		cnt++;
-		}
-%>
-            </ul>
-          </div>
-
-<%		
-	}catch(SQLException e){
-		out.print(e);
-	}finally{
-		if(pstmt != null)
-			pstmt.close();
-		if(conn!=null)
-			conn.close();
-	}
-%>
-          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h5>게시판 제목</h5><hr>
-            <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
+			for(int i=0; i<pLimit; i++) {
+            	ForumDTO Dto = Dtos.get(i);
+                String title = Dto.getfTitle();
+                
+                
+                %>
+                <li class="text-truncate w-100" >
+                    <%=title %>
+                </li>
+                
+                <%
+            }
+			for(int i=Dtos.size(); i<5; i++){
+				%>
+                <li class="text-truncate w-100" >
+                   	표시할 내용이 없습니다.
+                </li>
+                
+                <%
+			}
+			%>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h5>게시판 제목</h5><hr>
+          <%
+	          Dtos = lincDAO.forumSelectAtCat(3);
+          	  cat = lincDAO.catCheck(3);
+				if(Dtos.size() < 5){
+	          	pLimit = Dtos.size();
+	          }else{
+	          	pLimit = 5;
+	          }
+          %>
+            <h5><%=cat %></h5><hr>
             <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
+			<%
+			
+			for(int i=0; i<pLimit; i++) {
+            	ForumDTO Dto = Dtos.get(i);
+                String title = Dto.getfTitle();
+                
+                
+                %>
+                <li class="text-truncate w-100" >
+                    <%=title %>
+                </li>
+                
+                <%
+            }
+			for(int i=Dtos.size(); i<5; i++){
+				%>
+                <li class="text-truncate w-100" >
+                   	표시할 내용이 없습니다.
+                </li>
+                
+                <%
+			}
+			%>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h5>게시판 제목</h5><hr>
+          <%
+	          Dtos = lincDAO.forumSelectAtCat(4);
+          	  cat = lincDAO.catCheck(4);
+				if(Dtos.size() < 5){
+	          	pLimit = Dtos.size();
+	          }else{
+	          	pLimit = 5;
+	          }
+          %>
+            <h5><%=cat %></h5><hr>
             <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
+			<%
+			
+			for(int i=0; i<pLimit; i++) {
+            	ForumDTO Dto = Dtos.get(i);
+                String title = Dto.getfTitle();
+                
+                
+                %>
+                <li class="text-truncate w-100" >
+                    <%=title %>
+                </li>
+                
+                <%
+            }
+			for(int i=Dtos.size(); i<5; i++){
+				%>
+                <li class="text-truncate w-100" >
+                   	표시할 내용이 없습니다.
+                </li>
+                
+                <%
+			}
+			%>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h5>게시판 제목</h5><hr>
+          <%
+	          Dtos = lincDAO.forumSelectAtCat(5);
+          	  cat = lincDAO.catCheck(5);
+				if(Dtos.size() < 5){
+	          	pLimit = Dtos.size();
+	          }else{
+	          	pLimit = 5;
+	          }
+          %>
+            <h5><%=cat %></h5><hr>
             <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
+			<%
+			
+			for(int i=0; i<pLimit; i++) {
+            	ForumDTO Dto = Dtos.get(i);
+                String title = Dto.getfTitle();
+                
+                
+                %>
+                <li class="text-truncate w-100" >
+                    <%=title %>
+                </li>
+                
+                <%
+            }
+			for(int i=Dtos.size(); i<5; i++){
+				%>
+                <li class="text-truncate w-100" >
+                   	표시할 내용이 없습니다.
+                </li>
+                
+                <%
+			}
+			%>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h5>게시판 제목</h5><hr>
+          <%
+	          Dtos = lincDAO.forumSelectAtCat(6);
+          	  cat = lincDAO.catCheck(6);
+				if(Dtos.size() < 5){
+	          	pLimit = Dtos.size();
+	          }else{
+	          	pLimit = 5;
+	          }
+          %>
+            <h5><%=cat %></h5><hr>
             <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
+			<%
+			
+			for(int i=0; i<pLimit; i++) {
+            	ForumDTO Dto = Dtos.get(i);
+                String title = Dto.getfTitle();
+                
+                
+                %>
+                <li class="text-truncate w-100" >
+                    <%=title %>
+                </li>
+                
+                <%
+            }
+			for(int i=Dtos.size(); i<5; i++){
+				%>
+                <li class="text-truncate w-100" >
+                   	표시할 내용이 없습니다.
+                </li>
+                
+                <%
+			}
+			%>
             </ul>
           </div>
           <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h5>게시판 제목</h5><hr>
+          <%
+	          Dtos = lincDAO.forumSelectAtCat(7);
+          	  cat = lincDAO.catCheck(7);
+				if(Dtos.size() < 5){
+	          	pLimit = Dtos.size();
+	          }else{
+	          	pLimit = 5;
+	          }
+          %>
+            <h5><%=cat %></h5><hr>
             <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
+			<%
+			
+			for(int i=0; i<pLimit; i++) {
+            	ForumDTO Dto = Dtos.get(i);
+                String title = Dto.getfTitle();
+                
+                
+                %>
+                <li class="text-truncate w-100" >
+                    <%=title %>
+                </li>
+                
+                <%
+            }
+			for(int i=Dtos.size(); i<5; i++){
+				%>
+                <li class="text-truncate w-100" >
+                   	표시할 내용이 없습니다.
+                </li>
+                
+                <%
+			}
+			%>
             </ul>
           </div>
-          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h5>게시판 제목</h5><hr>
-            <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
-            </ul>
-          </div>
-          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h5>게시판 제목</h5><hr>
-            <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
-            </ul>
-          </div>
-          <div id="M_list"class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <h5>게시판 제목</h5><hr>
-            <ul class="list_content">
-              <li>요소 1</li>
-              <li>요소 2</li>
-              <li>요소 3</li>
-              <li>요소 4</li>
-              <li>요소 5</li>
-            </ul>
-          </div>
-        </div>
+          
 
 
 
       </div>
-      <div class="column_right d-none d-md-block col-4" id="M_Right">
+      </div>
+      <div class="d-none d-md-block col-4" id="M_Right">
 <%
 	if(session.getAttribute("userid")==null){
 %>

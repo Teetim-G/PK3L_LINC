@@ -76,7 +76,7 @@ public class LincDAO {
         return dtos;
     }
 	
-	// 게시판 이름 찾는 함수
+	// 게시판번호로 게시판 이름 찾는 함수
 	public String catCheck(int cNum) {
 		this.dbConn();
 		StringBuffer sSql = new StringBuffer();
@@ -276,7 +276,51 @@ public class LincDAO {
 	        
 	        return dtos;
 	    }
-	
+		// 게시판 번호로 게시글 검색
+				public ArrayList<ForumDTO> forumSelectAtCat(int cNum) {
+					this.dbConn();
+					
+			        ArrayList<ForumDTO> dtos = new ArrayList<ForumDTO>();
+			        StringBuffer sSql = new StringBuffer();
+			        sSql.append("select * from forum ");
+			        sSql.append("where is_Delete = 0 AND n_ForumCategory = ? order by s_WriteDay desc");
+			        
+
+			        
+			        try {
+			            pstmt = conn.prepareStatement(sSql.toString());
+			            pstmt.setInt(1, cNum);
+			            rs = pstmt.executeQuery();
+			            
+			            while (rs.next()) {
+			            	int order = rs.getInt("n_PostOrder");
+			            	java.sql.Timestamp wday = rs.getTimestamp("s_WriteDay");
+			                String title = rs.getString("s_Title");
+			                String content = rs.getString("s_Content");
+			                String user = rs.getString("s_PostUser");
+			                int viewcnt = rs.getInt("n_ViewCount");
+			                int goodcnt = rs.getInt("n_GoodCount");
+			                int badcnt = rs.getInt("n_BadCount");
+			                int isdelete = rs.getInt("is_Delete");
+			                int category = rs.getInt("n_ForumCategory"); 
+			                ForumDTO dto = new ForumDTO(order, wday, title, content,user,viewcnt,goodcnt,badcnt,isdelete,category);
+			                dtos.add(dto);
+			            }
+			            
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        } finally {
+			            try {
+			                if(rs != null) rs.close();
+			                if(pstmt != null) pstmt.close();
+			                if(conn != null) conn.close();
+			            } catch (Exception e) {
+			                e.printStackTrace();
+			            }
+			        }
+			        
+			        return dtos;
+			    }	
 	
 		// db 연결
 		private void dbConn() {
@@ -301,57 +345,7 @@ public class LincDAO {
 		}
 		
 		
-	// 로그인을 시도하는 함수****
-
-	public int login(String userID, String userPassword) {
-
-		String SQL = "SELECT userPassword FROM USER WHERE userID = ?";
-
-		try {
-
-			// pstmt : prepared statement 정해진 sql문장을 db에 삽입하는 형식으로 인스턴스가져옴
-
-			pstmt = conn.prepareStatement(SQL);
-
-			// sql인젝션 같은 해킹기법을 방어하는것... pstmt을 이용해 하나의 문장을 미리 준비해서(물음표사용)
-
-			// 물음표해당하는 내용을 유저아이디로, 매개변수로 이용.. 1)존재하는지 2)비밀번호무엇인지
-
-			pstmt.setString(1, userID);
-
-			// rs:result set 에 결과보관
-
-			rs = pstmt.executeQuery();
-
-			// 결과가 존재한다면 실행
-
-			if (rs.next()) {
-
-				// 패스워드 일치한다면 실행
-
-				if (rs.getString(1).equals(userPassword)) {
-
-					return 1; // 라긴 성공
-
-				} else
-
-					return 0; // 비밀번호 불일치
-
-			}
-
-			return -1; // 아이디가 없음 오류
-
-
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return -2; // 데이터베이스 오류를 의미
-
-	}
+	
 
 
 

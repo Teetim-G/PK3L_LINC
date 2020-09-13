@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 <link rel="stylesheet" href="css/LINC_Login.css">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="simple-login-container">
-    <h2>로고 들어갈 자리</h2>
+    <h2>인디 워커즈 로그인</h2>
     <form action="LINC_MAIN.jsp" name="login_form"id="login_form"method="post">
     <div class="row">
         <div class="col-md-12 form-group">

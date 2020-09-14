@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 
@@ -277,50 +278,89 @@ public class LincDAO {
 	        return dtos;
 	    }
 		// 게시판 번호로 게시글 검색
-				public ArrayList<ForumDTO> forumSelectAtCat(int cNum) {
-					this.dbConn();
-					
-			        ArrayList<ForumDTO> dtos = new ArrayList<ForumDTO>();
-			        StringBuffer sSql = new StringBuffer();
-			        sSql.append("select * from forum ");
-			        sSql.append("where is_Delete = 0 AND n_ForumCategory = ? order by s_WriteDay desc");
-			        
+		public ArrayList<ForumDTO> forumSelectAtCat(int cNum) {
+			this.dbConn();
+			
+	        ArrayList<ForumDTO> dtos = new ArrayList<ForumDTO>();
+	        StringBuffer sSql = new StringBuffer();
+	        sSql.append("select * from forum ");
+	        sSql.append("where is_Delete = 0 AND n_ForumCategory = ? order by s_WriteDay desc");
+	        
 
-			        
-			        try {
-			            pstmt = conn.prepareStatement(sSql.toString());
-			            pstmt.setInt(1, cNum);
-			            rs = pstmt.executeQuery();
-			            
-			            while (rs.next()) {
-			            	int order = rs.getInt("n_PostOrder");
-			            	java.sql.Timestamp wday = rs.getTimestamp("s_WriteDay");
-			                String title = rs.getString("s_Title");
-			                String content = rs.getString("s_Content");
-			                String user = rs.getString("s_PostUser");
-			                int viewcnt = rs.getInt("n_ViewCount");
-			                int goodcnt = rs.getInt("n_GoodCount");
-			                int badcnt = rs.getInt("n_BadCount");
-			                int isdelete = rs.getInt("is_Delete");
-			                int category = rs.getInt("n_ForumCategory"); 
-			                ForumDTO dto = new ForumDTO(order, wday, title, content,user,viewcnt,goodcnt,badcnt,isdelete,category);
-			                dtos.add(dto);
-			            }
-			            
-			        } catch (Exception e) {
-			            e.printStackTrace();
-			        } finally {
-			            try {
-			                if(rs != null) rs.close();
-			                if(pstmt != null) pstmt.close();
-			                if(conn != null) conn.close();
-			            } catch (Exception e) {
-			                e.printStackTrace();
-			            }
-			        }
-			        
-			        return dtos;
-			    }	
+	        
+	        try {
+	            pstmt = conn.prepareStatement(sSql.toString());
+	            pstmt.setInt(1, cNum);
+	            rs = pstmt.executeQuery();
+	            
+	            while (rs.next()) {
+	            	int order = rs.getInt("n_PostOrder");
+	            	java.sql.Timestamp wday = rs.getTimestamp("s_WriteDay");
+	                String title = rs.getString("s_Title");
+	                String content = rs.getString("s_Content");
+	                String user = rs.getString("s_PostUser");
+	                int viewcnt = rs.getInt("n_ViewCount");
+	                int goodcnt = rs.getInt("n_GoodCount");
+	                int badcnt = rs.getInt("n_BadCount");
+	                int isdelete = rs.getInt("is_Delete");
+	                int category = rs.getInt("n_ForumCategory"); 
+	                ForumDTO dto = new ForumDTO(order, wday, title, content,user,viewcnt,goodcnt,badcnt,isdelete,category);
+	                dtos.add(dto);
+	            }
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if(rs != null) rs.close();
+	                if(pstmt != null) pstmt.close();
+	                if(conn != null) conn.close();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        
+	        return dtos;
+	    }
+
+		
+		// 게시글번호로 댓글검색
+		public ArrayList<CommentDTO> commentSelectAtFNum(int fNum){
+			this.dbConn();
+			
+			ArrayList<CommentDTO> dtos = new ArrayList<CommentDTO>();
+			StringBuffer sSql = new StringBuffer();
+			sSql.append("select * from comment ");
+			sSql.append("where is_delete = 0 and n_ForumNum = ? order by s_WriteDay desc");
+			try {
+				pstmt = conn.prepareStatement(sSql.toString());
+	            pstmt.setInt(1, fNum);
+	            rs = pstmt.executeQuery();
+	            while(rs.next()) {
+	            	int cOrder = rs.getInt("n_CommentOrder");
+	            	int f_Num = rs.getInt("n_ForumNum");
+	            	String cWriter = rs.getString("s_CommentWriter");
+	            	String cComment = rs.getString("s_Comment");
+	            	Timestamp wDay = rs.getTimestamp("s_WriteDay");
+	            	int cDeep = rs.getInt("n_CommentDeep");
+	            	int isDelete = rs.getInt("is_Delete");
+	            	CommentDTO dto = new CommentDTO(cOrder, f_Num, cWriter, cComment, wDay, cDeep, isDelete);
+	            	dtos.add(dto);
+	            }
+				
+			} catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if(rs != null) rs.close();
+	                if(pstmt != null) pstmt.close();
+	                if(conn != null) conn.close();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+			return dtos;
+		}
 	
 		// db 연결
 		private void dbConn() {

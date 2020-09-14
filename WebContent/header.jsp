@@ -19,25 +19,34 @@
                 <a class="nav-link" href="LINC_BlogMain.jsp">블로그</a>
               </li>
               
-              
             </ul>
             <form class="form-inline my-2 my-lg-0" action="LINC_Search.jsp">
-              <input name="keyWord" class="form-control mr-sm-2" type="text"  placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit" >Search</button>
-            </form>
+	              <input name="keyWord" class="form-control mr-sm-2" type="text"  placeholder="Search" aria-label="Search">
+	              <button class="form-control btn btn-outline-success my-2 my-sm-0 mx-2" type="submit" >Search</button>
+	        </form>
+            <div id="profile" class=" text-center">
 <%      
 			if(session.getAttribute("userid")==null){
 %>
-            <button class="btn btn-outline-primary my-2 my-sm-0 mx-2" onclick="location.href='LINC_Login.jsp'">로그인</button>
+            	<button class="btn btn-outline-primary" onclick="location.href='LINC_Login.jsp'">로그인</button>
 <%
 			}else{
 %>
-			<div id="profile" class=" text-center">
+			
      			<a href="LINC_MyPage.jsp" class="text-center text-white mx-2"><%=session.getAttribute("usernick") %></a>
 		     	<button class="btn btn-sm btn-secondary " type="button" onclick="location.href='LINC_Logout.jsp'" >로그아웃</button>
+		     	<%
+		     	if(session.getAttribute("userid").equals("admin")){
+				%>
+				<button type="button" class="btn btn-outline-info mx-2" onclick="location.href='LINC_AdminPgpotomain.jsp'">관리자 페이지로 이동</button>
+				
+				<%
+				
+				}%>
 		     </div>
 <%
 			}
+			
 %>
           </div>
         </div>

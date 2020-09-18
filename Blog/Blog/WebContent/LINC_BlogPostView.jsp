@@ -7,35 +7,73 @@
 <head>
 <%@ include file="BSLoad.jsp"%>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width" , initial-scale="1">
-<link rel="stylesheet" href="css/base-layout.css">
 <title>게시글 목록</title>
+<%@ include file="LINC_DBConnect.jsp"%>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+	function postDelete(Post){ //게시글 삭제
+
+		pr_title = "게시글삭제"
+		var url = "LINC_BlogPostDelete.jsp";
+		window.open("LINC_BlogPostDelete.jsp","게시글삭제","width=200, height=100");
+		post.target = pr_title;
+		post.action = url;
+		post.method = "post";
+		post.submit();
+
+		// location.href='LINC_BlogPostList.jsp';
+
+	}
+</script>
+
+<style>
+body {
+  margin: 0;
+}
+
+#wrap {
+	width: 100%;
+	height: 100%;
+}
+
+#main {
+	width: 1200px;
+	margin: auto;
+}
+
+#menu {
+	width: 200px;
+	height: auto;
+	float: left;
+	text-align: center;
+}
+
+#contents {
+  width: 900px;
+	height: 100%;
+}
+
+#conmain {
+  height: 1000px;
+	overflow:auto;
+}
+
+#header {
+	height: 56px;
+}
+
+.smenu:hover {
+	cursor: pointer;
+}
+
+
+
+</style>
 
 </head>
 <body>
 
-	<%@ include file="LINC_DBConnect.jsp"%>
-	<%@ include file="header.jsp"%>
-
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	
-	<script type="text/javascript">
-		function postDelete(Post){ //게시글 삭제
-			
-			pr_title = "게시글삭제"
-			var url = "LINC_BlogPostDelete.jsp";
-			window.open("LINC_BlogPostDelete.jsp","게시글삭제","width=200, height=100");
-			post.target = pr_title;
-			post.action = url;
-			post.method = "post";
-			post.submit();
-			
-			// location.href='LINC_BlogPostList.jsp';
-			
-		}
-	</script>
-	
-	
 	<%
 		//페이지 링크 : LINC_BlogPostView.jsp?myID=글번호
 
@@ -43,15 +81,13 @@
 	String sIDX = request.getParameter("myID");
 
 	ResultSet rs = null;
-
 	Statement stmt = null;
 
 	try {
-		String sSQL = "SELECT * FROM linc_c.forum where is_delete='0'&&n_PostOrder=" + "'" + sIDX + "'";
+		// String sSQL = "UPDATE forum SET n_ViewCount = n_ViewCount + 1 WHERE n_PostOrder="+ "'" + sIDX +"';"+ "SELECT * FROM linc_c.forum where is_delete='0'&&n_PostOrder="+ "'"+ sIDX +"';";
+		String sSQL = "SELECT * FROM linc_c.forum where is_delete='0'&&n_PostOrder="+ "'"+ sIDX +"'";
 		stmt = conn.createStatement();
 		rs = stmt.executeQuery(sSQL);
-
-		// out.println(sSQL + "<br>");
 
 		while (rs.next()) {
 
@@ -60,40 +96,34 @@
 			String sTitle = rs.getString("s_Title");
 			String sWriteDay = rs.getString("s_WriteDay");
 			// String sTag = rs.getString("s_Tag");
-			// String sCategory = rs.getString("s_Category");
 			String sView = rs.getString("n_ViewCount");
 			String sGood = rs.getString("n_GoodCount");
 			// String sBad = rs.getString("n_BadCount");
 			String sContent = rs.getString("s_Content");
 	%>
 
-	<div style="height: 56px;"></div>
-
-	<div style="margin: auto; height: 1000px; width: 1200px;">
-		<div style="width: 100%;">
-			<div class="board">
-				<ul class="BoardList">
-					<li><a href="LINC_BlogMain.jsp">블로그 메인</a></li>
-					<li><a href="LINC_BlogUserHome.jsp">전체글보기</a></li>
-					<li><a href="LINC_BlogBoardTest1.jsp">게시판1</a></li>
-					<li><a href="LINC_BlogBoardTest2.jsp">게시판2</a></li>
-					<li><a href="LINC_BlogBoardTest3.jsp">게시판3</a></li>
-				</ul>
-
-
-				<div>
-					<ul>
-						<li><a href="LINC_BlogWrite.jsp">글 작성하기</a></li>
-						<li><a href="LINC_BlogPostList.jsp">게시글 목록</a></li>
-						<li><a href="LINC_BlogManagement.jsp">블로그 관리</a></li>
-					</ul>
-				</div>
+	<div id="wrap">
+	    <div id="header">
+		     <%@ include file="header.jsp" %>
+	    </div>
+ 		 <div id="main">
+		<div id="menu">
+			<div class="list-group" id="list-tab" role="tablist">
+				<a class="list-group-item list-group-item-action" data-toggle="list" onclick="location.href='LINC_BlogMain.jsp'">블로그 메인</a>
+				<a class="list-group-item list-group-item-action" data-toggle="list" onclick="location.href='LINC_BlogMyHome.jsp'">전체글보기</a>
+				<a class="list-group-item list-group-item-action active" data-toggle="list" onclick="location.href='LINC_BlogBoardTest1.jsp'">게시판1</a>
+				<a class="list-group-item list-group-item-action" data-toggle="list" onclick="location.href='LINC_BlogBoardTest2.jsp'">게시판2</a>
+				<a class="list-group-item list-group-item-action" data-toggle="list" onclick="location.href='LINC_BlogBoardTest3.jsp'">게시판3</a>
+				<a class="list-group-item list-group-item-action" data-toggle="list" onclick="location.href='LINC_BlogWrite.jsp'">글 작성하기</a>
+				<a class="list-group-item list-group-item-action" data-toggle="list" onclick="location.href='LINC_BlogPostList.jsp'">게시글 목록</a>
+				<a class="list-group-item list-group-item-action" data-toggle="list" onclick="location.href='LINC_BlogManagement.jsp'">블로그 관리</a>
 			</div>
-			<div class="contents" style="width: 1000px;">
+		</div>
+			<div class="contents">
 				<form name="post" method="POST" action="LINC_BlogPostDelete.jsp">
-					
-					<div id="conmain" style="width: 800px">
-						<table border="1" align="center" style="clear: both; width: 100%;">
+
+					<div id="conmain">
+						<table border="1" align="center" style="width: 1000px;">
 							<tbody>
 								<tr>
 									<td width="10" align="center"><a>제목</a></td>
@@ -121,30 +151,30 @@
 								</tr>
 							</tbody>
 						</table>
+						<div style="float: left;">
+							<button class="btn btn-primary pull-right" type="button" onclick="postDelete(post)" name="delete">
+								<a>삭제</a>
+							</button>
+						</div>
+						<div style="float: right;">
+							<button class="btn btn-primary pull-right" type="button" onclick="location.href='LINC_BlogPostList.jsp'">
+								<a>목록</a>
+							</button>
+						</div>
 					</div>
 					<input type="hidden" name="index" value="<%=sPostOrder%>">
-					<div style="float: left;">
-						<!--  <button type="button" onclick="postDelete(post)" name="delete">
-							<a>삭제</a>
-						</button> -->
-						<button type="button" onclick="postDelete(post)" name="delete">
-							<a>삭제</a>
-						</button>
-					</div>
-					<div style="float: right;">
-						<button type="button" onclick="location.href='LINC_BlogPostList.jsp'">
-							<a>목록</a>
-						</button>
-					</div>
 				</form>
 			</div>
-			
+
 			<div id="comment">
-			
+
 			</div>
 		</div>
+		<div id="footer">
+	  	<%@ include file="footer.jsp" %>
+	  	<%@ include file="JsLoad.jsp" %>
+  </div>
 	</div>
-
 	<%
 		}
 	} catch (SQLException ex) {
@@ -159,9 +189,5 @@
 	conn.close();
 	}
 	%>
-
-	<%@ include file="footer.jsp"%>
-
-	<%@ include file="JsLoad.jsp"%>
 </body>
 </html>

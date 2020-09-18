@@ -5,47 +5,76 @@
 <head>
 <%@ include file="BSLoad.jsp" %>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width", initial-scale="1">
-<link rel="stylesheet" href="css/base-layout.css">
 
 <title>전체 블로그 메인</title>
 
-    
+<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+<style>
+body {
+  margin: 0;
+}
+
+#wrap {
+	width: 100%;
+	height: 100%;
+}
+
+#main {
+	width: 1200px;
+	overflow: auto;
+	margin: auto;
+}
+
+#menu {
+	width: 200px;
+	height: auto;
+	float: left;
+	text-align: center;
+}
+
+#contents {
+	overflow: auto;
+	height: 100%;
+}
+
+#header {
+	height: 56px;
+}
+
+.smenu:hover {
+	cursor: pointer;
+}
+
+</style>
+
 </head>
 <body>
+	<%@ include file="LINC_DBConnect.jsp" %>
 
-	<!--   %@ include file="LINC_DBConnect.jsp" % -->
-	<%@ include file="header.jsp" %>
-	
-	<div style="height:56px;">
-	</div>
-	
-	<div style="margin:auto; height:1000px; width:1200px;">
-		<div class="board">
-			<ul>
-				<li>
-					<a href="LINC_BlogMain.jsp">블로그 메인</a>
-				</li>
-				<li>
-					<a href="LINC_BlogUserHome.jsp">내 블로그 가기</a>
-				</li>
-				<li>
-					<a href="#">랜덤 블로그 방문</a>
-				</li>
-			</ul>
-		</div>
-		
-		<div class="contents" style="width:1000px;">
-			<div id="conmain" style="height:200px; width:100%;">
+  <div id="wrap">
+    <div id="header">
+      <%@ include file="header.jsp" %>
+    </div>
+  	<div id="main">
+      <div id="menu">
+    		<div class="list-group" id="list-tab" role="tablist">
+    			<a class="list-group-item list-group-item-action active" data-toggle="list" onclick="location.href='LINC_BlogMain.jsp'">블로그 메인</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" onclick="location.href='LINC_BlogMyHome.jsp'">내 블로그 가기</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" onclick="location.href='LINC_BlogOtherHome.jsp'">랜덤 블로그 방문</a>
+    		</div>
+      </div>
+
+  		<div class="contents">
 				<input class="submit" type="button" value="오름차순">
 				<input class="submit" type="button" value="내림차순">
-			</div>
-		</div>
-	</div>
-	
-	<%@ include file="footer.jsp" %>
-	
-	<%@ include file="JsLoad.jsp" %>
+  		</div>
+	   </div>
+     <div id="footer">
+       <%@ include file="footer.jsp" %>
+     	 <%@ include file="JsLoad.jsp" %>
+     </div>
+   </div>
 
 </body>
 

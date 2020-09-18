@@ -11,17 +11,17 @@
 
 	<%@ include file="LINC_DBConnect.jsp"%>
 	<% request.setCharacterEncoding("utf-8"); %>
-	<% 
+	<%
 		String sCategory = request.getParameter("PostSubject");
 		String sTitle = request.getParameter("PostTitle");
 		String sTag = request.getParameter("PostTag");
 		String sContent = request.getParameter("PostContents");
 		String sUserID = request.getParameter("postRegister");
 	%>
-	
+
 	<%
-	
-	
+
+
 		Statement stmt = null;
 		try{
 			stmt = conn.createStatement();
@@ -30,15 +30,17 @@
 					  "values" +
 					  "(now(),'"+sTitle+"','"+sContent+"','"+sCategory+"','Dong')"; */
 			String sSQL = "insert into linc_c.forum" +
-					  "(s_WriteDay,s_Title,s_Content,s_PostUser)" +
+					  "(s_WriteDay,s_Title,s_Content,n_ForumCategory,s_PostUser,is_BlogWrite)" +
 					  "values" +
-					  "(now(),'"+sTitle+"','"+sContent+"','Finale')";
-			out.println(sSQL + "<br>");
-			
+					  "(now(),'" + sTitle + "','" + sContent + "','" + sCategory + "','Finale','1')";
 			stmt.executeUpdate(sSQL);//쿼리문을 실행하는 코드
-			out.println("입력에 성공하였습니다.");
+      /*if(sSQL.indexOf("<p><img src=")) {
+          String target = "title=\"";
+          int target_num = str.indexOf(target);
+          String sImageURL = str.subString(target_num,(str.substring(target_num).indexOf("\"")+target_num));
+
+      }*/
 		} catch(SQLException ex) {
-			out.println("입력에 실패하였습니다.<br>");
 			out.println("SQLException : " + ex.getMessage());
 		} finally {
 			if(stmt != null)
@@ -47,6 +49,9 @@
 				conn.close();
 		}
 	%>
+  <script>
+    self.close();
+  </script>
 
 </body>
 </html>

@@ -62,7 +62,8 @@
 		// 정보 출력
 		sFileInfo += "&bNewLine=true";
 		sFileInfo += "&sFileName=" + filename;
-		sFileInfo += "&sFileURL=/WebContent/SE2/multiupload/"+realFileNm;
+    // sFileInfo += "&sFileURL=61.84.24.210:8080/LINC_C/img/"+realFileNm;
+		sFileInfo += "&sFileURL=ROOT/SE2/multiupload/"+realFileNm;
 		out.println(sFileInfo);
 	}
 %>

@@ -1,69 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
 <head>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <%@ include file="BSLoad.jsp" %>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width", initial-scale="1">
-<link rel="stylesheet" href="css/base-layout.css">
+<%@ include file="LINC_DBConnect.jsp" %>
 
-<title>개인 블로그 관리</title>
-
-
-    
+<style>
+  body {
+    margin: 0;
+  }
+  #conmain{
+    width: 100%;
+    height: 100%;
+  }
+</style>
 </head>
 <body>
-
-	<!-- %@ include file="LINC_DBConnect.jsp" %-->
-	<%@ include file="header.jsp" %>
-	
-	<div style="height:56px;">
+	<div id="conmain">
+    <table class="table table-striped">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>날짜</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+      <tbody>
+        <tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>날짜</th>
+					<th>조회수</th>
+				</tr>
+      </tbody>
+    </table>
+    <ul class="pagination">
+      <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="margin: auto;">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+          <button type="button" class="btn btn-outline-primary">이전</button>
+          <button type="button" class="btn btn-primary">1</button>
+          <button type="button" class="btn btn-outline-primary">2</button>
+          <button type="button" class="btn btn-outline-primary">3</button>
+          <button type="button" class="btn btn-outline-primary">4</button>
+          <button type="button" class="btn btn-outline-primary">5</button>
+          <button type="button" class="btn btn-outline-primary">다음</button>
+        </div>
+      </div>
+      <div style="float: right;">
+        <select name="year" id="year">
+          <option value="all" selected="">제목+내용</option>
+          <option value="title">제목만</option>
+          <option value="contents">내용만</option>
+        </select> <input type="text" name="text">
+        <button type="button" name="검색">검색</button>
+      </div>
+    </ul>
 	</div>
-	
-	<div style="margin:auto; height:1000px; width:1200px;">
-		<div class="board">
-	
-			<ul class="BoardList">
-				<li>
-					<a href="LINC_BlogUserHome.jsp">내 블로그 가기</a>
-				</li>
-				<li>
-					<a href="LINC_BlogMngReset.jsp">블로그 초기화</a>
-				</li>
-				<li>
-					<a href="LINC_BlogMngCg.jsp">카테고리 설정</a>
-				</li>
-				<li>
-					<a href="LINC_BlogMngTm.jsp">테마 변경</a>
-				</li>
-				<li>
-					<a href="LINC_BlogMngIf.jsp">통계</a>
-				</li>
-			</ul>
-			
-			<ul class="BoardList">
-				<li>
-					<a href="LINC_BlogMngPost.jsp">게시글 관리</a>
-				</li>
-				<li>
-					<a href="LINC_BlogMngComment.jsp">댓글 관리</a>
-				</li>
-			</ul>
-
-		</div>
-		
-		<div class="contents" style="width:1000px;">
-			<div id="conmain">
-				<div align="center" style="border:1px solid; height:200px; width:100%;">
-					게시글 관리
-				</div>
-			</div>				
-		</div>
-		
-	</div>
-	
-	<%@ include file="footer.jsp" %>
-
 </body>
-</html>
